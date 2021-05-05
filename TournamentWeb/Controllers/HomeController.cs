@@ -5,33 +5,59 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using TournamentWeb.Models;
 
 namespace TournamentWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private UserManager<AppUser> userManager;
+        public HomeController(UserManager<AppUser> userMgr)
         {
-            _logger = logger;
+            userManager = userMgr;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        [Authorize]
+        public IActionResult Index() => View(GetData(nameof(Index)));
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        [Authorize(Roles = "Users")]
+        public IActionResult OtherAction() => View("Index", GetData(nameof(OtherAction)));
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        private Dictionary<string, object> GetData(string actionName) => new Dictionary<string, object>
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ["Action"] = actionName,
+            ["User"] = HttpContext.User.Identity.Name,
+            ["Authenticated"] = HttpContext.User.Identity.IsAuthenticated,
+            ["Auth Type"] = HttpContext.User.Identity.AuthenticationType,
+            ["In Users Role"] = HttpContext.User.IsInRole("Users"),
+            ["Qualification"] = CurrentUser.Result.Qualifications
+        };
+
+        [Authorize]
+        public async Task<IActionResult> UserProps()
+        {
+            return View(await CurrentUser);
         }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UserProps(
+
+        [Required] QualificationLevels qualifications)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = await CurrentUser;
+                user.Qualifications = qualifications;
+                await userManager.UpdateAsync(user);
+                return RedirectToAction("Index");
+            }
+            return View(await CurrentUser);
+        }
+        private Task<AppUser> CurrentUser =>
+            userManager.FindByNameAsync(HttpContext.User.Identity.Name);
     }
 }
