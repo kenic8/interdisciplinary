@@ -23,9 +23,6 @@ namespace TournamentWeb.Models
         public Tournament()
         {
         }
-
-
-
     }
 }
 

@@ -16,6 +16,11 @@ namespace TournamentWeb.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<TournamentWebContext>>()))
             {
+                if (context.Tournament.Any())
+                {
+                    return;   // DB has been seeded
+                }
+
 
                 var Attendent1 = new Attendees(
                     "Teamleader",
@@ -64,14 +69,13 @@ namespace TournamentWeb.Models
                     false
                     );
 
-                var Teams = new List<Teams>();
-                Teams.Add(Team1);
-                Teams.Add(Team2);
+                var Teamssa = new List<Teams>();
+                Teamssa.Add(Team1);
+                Teamssa.Add(Team2);
 
                 context.Tournament.AddRange(
                     new Tournament
                     {
-                        TournamentId = 1,
                         TournamentName = "TestTournament",
                         TournamentImage = "ImageString",
                         TournamentInfo = "InfoString",
@@ -80,7 +84,7 @@ namespace TournamentWeb.Models
                         ParticipantsAmount = 0,
                         UserId = "CreatorUserString",
                         Bracketsize = 4,
-                        Teams = Teams
+                        Teams = Teamssa
                     }
                 );
                 context.SaveChanges();
