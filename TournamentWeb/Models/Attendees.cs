@@ -5,14 +5,26 @@ using System.Threading.Tasks;
 
 namespace TournamentWeb.Models
 {
-    public class Attendees : User
+    public class Attendees
     {
+        public int ID { get; set; }
         public string UserStatus { get; set; }
 
-        public Attendees(int userId, string userName, string userPassword, int points, string discord, string userStatus) 
-            : base(userId, userName,userPassword, points, discord)
+
+        // Get from user class later
+        public string UserName { get; set; }
+
+        public Attendees()
         {
-            UserStatus = userStatus;
+
         }
+
+        public Attendees(string UserStatus, string UserName)
+        {
+            this.UserStatus = UserStatus;
+            this.UserName = UserName;
+        }
+
+        //public AppUser User = new AppUser();
     }
 }

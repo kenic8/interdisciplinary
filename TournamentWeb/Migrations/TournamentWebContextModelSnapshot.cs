@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TournamentWeb.Models;
+using TournamentWeb.Data;
 
 namespace TournamentWeb.Migrations
 {
-    [DbContext(typeof(AppIdentityDbContext))]
-    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TournamentWebContext))]
+    partial class TournamentWebContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -224,39 +224,27 @@ namespace TournamentWeb.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("TournamentWeb.Models.Bracket", b =>
+            modelBuilder.Entity("TournamentWeb.Models.Attendees", b =>
                 {
-                    b.Property<int>("BracketId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BracketSize")
+                    b.Property<int?>("TeamsTeamId")
                         .HasColumnType("int");
 
-                    b.HasKey("BracketId");
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Bracket");
-                });
+                    b.Property<string>("UserStatus")
+                        .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("TournamentWeb.Models.Match", b =>
-                {
-                    b.Property<int>("MatchId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasKey("ID");
 
-                    b.Property<int?>("BracketId")
-                        .HasColumnType("int");
+                    b.HasIndex("TeamsTeamId");
 
-                    b.Property<DateTime>("TimeFrame")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("MatchId");
-
-                    b.HasIndex("BracketId");
-
-                    b.ToTable("Match");
+                    b.ToTable("Attendees");
                 });
 
             modelBuilder.Entity("TournamentWeb.Models.Teams", b =>
@@ -269,21 +257,18 @@ namespace TournamentWeb.Migrations
                     b.Property<bool>("LostGame")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("MatchId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MatchPattern")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("MatchWins")
                         .HasColumnType("int");
 
                     b.Property<string>("TeamName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TournamentId")
+                        .HasColumnType("int");
+
                     b.HasKey("TeamId");
 
-                    b.HasIndex("MatchId");
+                    b.HasIndex("TournamentId");
 
                     b.ToTable("Teams");
                 });
@@ -295,81 +280,33 @@ namespace TournamentWeb.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BracketId")
+                    b.Property<int>("Bracketsize")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatorUserId")
+                    b.Property<int>("ParticipantsAmount")
                         .HasColumnType("int");
-
-                    b.Property<string>("Info")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TimeFrame")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("TournamentImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TournamentInfo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TournamentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TournamentId");
 
-                    b.HasIndex("BracketId");
-
-                    b.HasIndex("CreatorUserId");
-
                     b.ToTable("Tournament");
-                });
-
-            modelBuilder.Entity("TournamentWeb.Models.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Discord")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("User");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("TournamentWeb.Models.Attendees", b =>
-                {
-                    b.HasBaseType("TournamentWeb.Models.User");
-
-                    b.Property<int?>("BracketId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeamsTeamId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("BracketId");
-
-                    b.HasIndex("TeamsTeamId");
-
-                    b.HasDiscriminator().HasValue("Attendees");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -423,61 +360,28 @@ namespace TournamentWeb.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TournamentWeb.Models.Match", b =>
-                {
-                    b.HasOne("TournamentWeb.Models.Bracket", null)
-                        .WithMany("MatchList")
-                        .HasForeignKey("BracketId");
-                });
-
-            modelBuilder.Entity("TournamentWeb.Models.Teams", b =>
-                {
-                    b.HasOne("TournamentWeb.Models.Match", null)
-                        .WithMany("Teams")
-                        .HasForeignKey("MatchId");
-                });
-
-            modelBuilder.Entity("TournamentWeb.Models.Tournament", b =>
-                {
-                    b.HasOne("TournamentWeb.Models.Bracket", "Bracket")
-                        .WithMany()
-                        .HasForeignKey("BracketId");
-
-                    b.HasOne("TournamentWeb.Models.User", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorUserId");
-
-                    b.Navigation("Bracket");
-
-                    b.Navigation("Creator");
-                });
-
             modelBuilder.Entity("TournamentWeb.Models.Attendees", b =>
                 {
-                    b.HasOne("TournamentWeb.Models.Bracket", null)
-                        .WithMany("ParticipationList")
-                        .HasForeignKey("BracketId");
-
                     b.HasOne("TournamentWeb.Models.Teams", null)
                         .WithMany("Attendees")
                         .HasForeignKey("TeamsTeamId");
                 });
 
-            modelBuilder.Entity("TournamentWeb.Models.Bracket", b =>
+            modelBuilder.Entity("TournamentWeb.Models.Teams", b =>
                 {
-                    b.Navigation("MatchList");
-
-                    b.Navigation("ParticipationList");
-                });
-
-            modelBuilder.Entity("TournamentWeb.Models.Match", b =>
-                {
-                    b.Navigation("Teams");
+                    b.HasOne("TournamentWeb.Models.Tournament", null)
+                        .WithMany("Teams")
+                        .HasForeignKey("TournamentId");
                 });
 
             modelBuilder.Entity("TournamentWeb.Models.Teams", b =>
                 {
                     b.Navigation("Attendees");
+                });
+
+            modelBuilder.Entity("TournamentWeb.Models.Tournament", b =>
+                {
+                    b.Navigation("Teams");
                 });
 #pragma warning restore 612, 618
         }

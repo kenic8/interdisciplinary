@@ -5,16 +5,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
-namespace TournamentWeb.Models
+using TournamentWeb.Models;
+
+namespace TournamentWeb.Data
 {
 
-    public class AppIdentityDbContext : IdentityDbContext<AppUser>
+    public class TournamentWebContext : IdentityDbContext<AppUser>
     {
-        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options) { }
+        public TournamentWebContext(DbContextOptions<TournamentWebContext> options) : base(options) { }
 
         public DbSet<AppUser> AppUsers { get; set; }
 
-        public DbSet<TournamentWeb.Models.Tournament> Tournament { get; set; }
+        public DbSet<Tournament> Tournament { get; set; }
 
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)

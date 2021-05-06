@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TournamentWeb.Models;
+using TournamentWeb.Data;
 
 namespace TournamentWeb.Migrations
 {
-    [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20210506091322_test2")]
-    partial class test2
+    [DbContext(typeof(TournamentWebContext))]
+    [Migration("20210506135924_withID")]
+    partial class withID
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,50 +233,33 @@ namespace TournamentWeb.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Bracketsize")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatorUserId")
+                    b.Property<int>("ParticipantsAmount")
                         .HasColumnType("int");
-
-                    b.Property<string>("Info")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TimeFrame")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("TournamentImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TournamentInfo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TournamentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TournamentId");
 
-                    b.HasIndex("CreatorUserId");
-
                     b.ToTable("Tournament");
-                });
-
-            modelBuilder.Entity("TournamentWeb.Models.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Discord")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -328,15 +311,6 @@ namespace TournamentWeb.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TournamentWeb.Models.Tournament", b =>
-                {
-                    b.HasOne("TournamentWeb.Models.User", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorUserId");
-
-                    b.Navigation("Creator");
                 });
 #pragma warning restore 612, 618
         }
