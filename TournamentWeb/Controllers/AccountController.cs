@@ -24,23 +24,30 @@ namespace TournamentWeb.Controllers
             ViewBag.returnUrl = returnUrl;
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel details, string returnUrl)
+        public async Task<IActionResult> Login(LoginModel details)
         {
             if (ModelState.IsValid)
             {
+
                 AppUser user = await _userManager.FindByEmailAsync(details.Email);
-                if (user != null)
+                if (user==null)
+                {
+                    return RedirectToAction("Create", "Admin");
+                }
+                else if (user != null)
                 {
                     await _signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result =
                         await _signInManager.PasswordSignInAsync(user, details.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return Redirect(returnUrl ?? "/");
+                        return RedirectToAction("Landingpage", "Landing");
                     }
+                 
                 }
                 ModelState.AddModelError(nameof(LoginModel.Email), "Invalid user or password");
             }

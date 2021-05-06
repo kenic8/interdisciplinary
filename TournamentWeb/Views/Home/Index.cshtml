@@ -1,11 +1,21 @@
-﻿@model Dictionary<string, object>
-<div class="bg-primary m-1 p-1 text-white"><h4>User Details</h4></div>
-<table class="table table-sm table-bordered m-1 p-1">
-    @foreach (var kvp in Model)
-    {
-        <tr><th>@kvp.Key</th><td>@kvp.Value</td></tr>
-    }
-</table>
+﻿@model AppUser
+
+<h1> THis is the profile page!</h1>
+<div class="bg-primary m-1 p-1 text-white"
+     ><h4>@Model.UserName</h4></div>
+
+@if (Model.Email.ToString() == "admin@example.com")
+{ 
+<a class="btn btn-info" asp-area="" asp-controller="Admin" asp-action="Index">Admin overview</a>
+}
+
+
+<section>
+info:Refer to model to get data here
+
+</section>
+
+
 
 @if (User?.Identity?.IsAuthenticated ?? false)
 {

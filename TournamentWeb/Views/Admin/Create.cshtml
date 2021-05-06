@@ -1,5 +1,8 @@
 ﻿@model CreateModel
-<div class="bg-primary m-1 p-1 text-white"><h4>Create User</h4></div>
+<div class="bg-white m-1 p-1 text-danger"><h4>No user found in the system</h4></div>
+
+
+<p>Please create a user</p>
 <div asp-validation-summary=" All" class="text-danger"></div>
 
 
@@ -23,5 +26,5 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    <a asp-controller="Account" asp-action="Logout" class="btn btn-secondary">Cancel</a>
 </form>

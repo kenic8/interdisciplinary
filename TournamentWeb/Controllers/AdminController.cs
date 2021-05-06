@@ -9,7 +9,6 @@ namespace TournamentWeb.Controllers
     public class AdminController : Controller
     {
         private UserManager<AppUser> userManager;
-
         private IUserValidator<AppUser> userValidator;
         private IPasswordValidator<AppUser> passwordValidator;
         private IPasswordHasher<AppUser> passwordHasher;
@@ -28,6 +27,8 @@ namespace TournamentWeb.Controllers
 
         public ViewResult Create() => View();
         [HttpPost]
+
+        /// create  users --- use this with tournament creater
         public async Task<IActionResult> Create(CreateModel model)
         {
             if (ModelState.IsValid)
@@ -54,6 +55,8 @@ namespace TournamentWeb.Controllers
             return View(model);
         }
 
+
+        /// edit users -- use find async to find a user // if not create the user with create when creating a tournament.
         public async Task<IActionResult> Edit(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
