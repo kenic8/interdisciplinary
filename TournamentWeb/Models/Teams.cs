@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,8 @@ namespace TournamentWeb.Models
 {
     public class Teams
     {
-        public string TeamId { get; set; }
+        [Key]
+        public int TeamId { get; set; }
         public string TeamName { get; set; }
         public List<Attendees> Attendees { get; set; }
         public string MatchPattern { get; set; }

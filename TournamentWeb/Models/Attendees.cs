@@ -9,7 +9,7 @@ namespace TournamentWeb.Models
     {
         public string UserStatus { get; set; }
 
-        public Attendees(string userId, string userName, string userPassword, int points, string discord, string userStatus) 
+        public Attendees(int userId, string userName, string userPassword, int points, string discord, string userStatus) 
             : base(userId, userName,userPassword, points, discord)
         {
             UserStatus = userStatus;

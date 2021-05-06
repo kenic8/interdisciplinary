@@ -14,6 +14,8 @@ namespace TournamentWeb.Models
 
         public DbSet<AppUser> AppUsers { get; set; }
 
+        public DbSet<TournamentWeb.Models.Tournament> Tournament { get; set; }
+
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
         {

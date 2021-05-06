@@ -18,10 +18,10 @@ namespace TournamentWeb.Models
             ParticipationList.Add(attendees);
         }
 
-        public void AddMatches(Match match)
-        {
-            MatchList.Add(match);
-        }
+        //public void AddMatches(Match match)
+        //{
+        //    MatchList.Add(match);
+        //}
 
     }
 }

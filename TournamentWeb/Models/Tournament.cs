@@ -29,7 +29,7 @@ namespace TournamentWeb.Models
             TournamentName = tournamentName;
             CreationDate = DateTime.Now;
             TimeFrame = timeFrame;
-            Creator = creator;
+            //Creator = creator;
 
         }
     }
