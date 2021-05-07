@@ -14,27 +14,11 @@ namespace TournamentWeb.Controllers
         private Task<AppUser> CurrentUser =>
          userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
-
         private UserManager<AppUser> userManager;
         public TournamentController(UserManager<AppUser> userMgr)
         {
             userManager = userMgr;
         }
-
-
-        public IActionResult AddTournament()
-        {
-            Tournament objT = new Tournament();
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AddTournament(Tournament objT)
-        {
-
-            return View();
-        }
-
      
         ///check if user is logged in to create a tournament
         [Authorize]
