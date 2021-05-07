@@ -14,10 +14,7 @@ namespace TournamentWeb.Controllers
 {
     public class HomeController : Controller
     {
-         
-        /// <summary>
-        /// used for mapping users to profiles
-        /// </summary>
+        
 
         private UserManager<AppUser> userManager;
         public HomeController(UserManager<AppUser> userMgr)

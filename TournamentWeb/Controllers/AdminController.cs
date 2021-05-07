@@ -35,8 +35,12 @@ namespace TournamentWeb.Controllers
             {
                 AppUser user = new AppUser
                 {
+
+                    ////Remember to add model props here
                     UserName = model.Name,
-                    Email = model.Email
+                    Email = model.Email,
+                    UserDiscord = model.UserDiscord,
+                    Points = model.Points,
                 };
                 IdentityResult result = await userManager.CreateAsync(user, model.Password);
 

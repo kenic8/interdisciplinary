@@ -4,6 +4,11 @@
 <div class="bg-primary m-1 p-1 text-white"
      ><h4>@Model.UserName</h4></div>
 
+@if (Model != null)
+{
+
+}
+
 @if (Model.Email.ToString() == "admin@example.com")
 { 
 <a class="btn btn-info" asp-area="" asp-controller="Admin" asp-action="Index">Admin overview</a>
