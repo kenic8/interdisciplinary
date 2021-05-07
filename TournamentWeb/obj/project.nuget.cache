@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CfW6/QICq8MIoRP2iEknqmugCTCbYFyXqWfJJ5XuikfY/mO+GbhlqrQ3UStXqFeyEO0oCQX7Bc76j2h6smvfKQ==",
+  "dgSpecHash": "aI9n/ALYIk9OFIt4YIOB0JRSQHC5+Kr0+WvEmRWS2afxCRJ94rV4tjM7Hrnza3M4L90VuDt740pMRIOX21vU0g==",
   "success": true,
   "projectFilePath": "C:\\Users\\lille\\Desktop\\skole repo\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
   "expectedPackageFiles": [
@@ -188,12 +188,5 @@
     "C:\\Users\\lille\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\lille\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\lille\\Desktop\\skole repo\\interdisciplinary\\TournamentWeb\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }
