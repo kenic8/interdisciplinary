@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TournamentWeb.Models;
+using TournamentWeb.Data;
 
 namespace TournamentWeb
 {
@@ -20,7 +21,7 @@ namespace TournamentWeb
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            services.AddDbContext<TournamentWebContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
 
             services.AddIdentity<AppUser, IdentityRole>(opts => {
@@ -31,7 +32,7 @@ namespace TournamentWeb
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
-            }).AddEntityFrameworkStores<AppIdentityDbContext>()
+            }).AddEntityFrameworkStores<TournamentWebContext>()
             .AddDefaultTokenProviders();
 
             //services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Users/Login");

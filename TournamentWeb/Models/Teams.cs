@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,23 +8,33 @@ namespace TournamentWeb.Models
 {
     public class Teams
     {
-        public string TeamId { get; set; }
+        [Key]
+        public int TeamId { get; set; }
         public string TeamName { get; set; }
-        public List<Attendees> Attendees { get; set; }
-        public string MatchPattern { get; set; }
+        public List<Attendees> Attendees { get; set; } = new List<Attendees>();
         public int MatchWins { get; set; }
         public bool LostGame { get; set; }
 
-        public void AddMatchPattern(string matchPattern)
+
+
+        //public void AddStatus( Attendees user, string status) // to users
+        //{
+        //    Attendees userFound = Attendees.FirstOrDefault(u => u.UserId == user.UserId);
+        //    userFound.UserStatus = status;
+
+        //}
+        public Teams()
         {
-            MatchPattern += matchPattern;
+
         }
 
-        public void AddStatus( Attendees user, string status) // to users
+        public Teams(int TeamId, string TeamName, List<Attendees> Attendees,
+            int MatchWins, bool LostGame)
         {
-            Attendees userFound = Attendees.FirstOrDefault(u => u.UserId == user.UserId);
-            userFound.UserStatus = status;
-
+            this.TeamName = TeamName;
+            this.Attendees = Attendees;
+            this.MatchWins = MatchWins;
+            this.LostGame = LostGame;
         }
     }
 }
