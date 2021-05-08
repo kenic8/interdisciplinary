@@ -79,7 +79,7 @@ namespace TournamentWeb.Models
                     new Tournament
                     {
                         TournamentName = "TestTournament",
-                        TournamentImage = "ImageString",
+                        //TournamentImage = "ImageString",
                         TournamentInfo = "InfoString",
                         CreationDate = DateTime.Now,
                         TimeFrame = new DateTime(2024, 12, 31, 16, 45, 0),
