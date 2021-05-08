@@ -467,3 +467,4 @@ C:\Users\carl-\OneDrive\Skrivebord\local repos\TournamentWeb\obj\Debug\net5.0\To
 C:\Users\carl-\OneDrive\Skrivebord\local repos\TournamentWeb\obj\Debug\net5.0\ref\TournamentWeb.dll
 C:\Users\carl-\OneDrive\Skrivebord\local repos\TournamentWeb\obj\Debug\net5.0\TournamentWeb.pdb
 C:\Users\carl-\OneDrive\Skrivebord\local repos\TournamentWeb\obj\Debug\net5.0\TournamentWeb.genruntimeconfig.cache
+C:\Users\carl-\OneDrive\Skrivebord\repos\Tournamanta\interdisciplinary\TournamentWeb\obj\Debug\net5.0\Razor\Views\Addtournament\AddTournament.cshtml.g.cs

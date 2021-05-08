@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RHqUR+u9u6dV1UJFMcRZVDu1ci7PI79EWYdKDyi8l68H/M5pALokE/NaJPL9Auyn/s6T9x0KtLryQHnhjRI5MQ==",
+  "dgSpecHash": "VxINcV+hyqmSUIWZpVy0E88owMpp48pfNCMvLextoIcaYiaPJU69yhQ41CrrIc754bf5S4ZmUxYqal1xaARBOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\carl-\\OneDrive\\Skrivebord\\local repos\\TournamentWeb\\TournamentWeb.csproj",
+  "projectFilePath": "C:\\Users\\carl-\\OneDrive\\Skrivebord\\repos\\Tournamanta\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carl-\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\carl-\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
