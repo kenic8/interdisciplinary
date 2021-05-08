@@ -1,0 +1,100 @@
+﻿@model TournamentWeb.Models.Tournament
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@using Microsoft.AspNetCore.Identity;
+
+<h1>
+    @Model.TournamentName
+</h1>
+
+
+<div class="Tcontainer" style="background: url(images/tournemanet/@Model.TournamentImage)">
+    <img src="/images/@Model.TournamentImage"/>
+</div>
+
+<div class="bg-primary m-1 p-1 text-white">
+    Participants
+</div>
+
+
+<div class="Pcontainer">
+    @foreach (var team in Model.Teams)
+    {
+        <div class="teamwrap">
+            <div class="teamName">
+                <p>@Html.DisplayFor(modelItem => team.TeamName)</p>
+                @foreach (var Attendee in team.Attendees)
+                {
+                    @if (UserManager.GetUserId(User) == Attendee.UserID && Attendee.UserStatus == "TeamLeader") {
+            <a asp-action="Delete" asp-route-id="@Model.TournamentId" asp-route-TeamId="@team.TeamId">
+                <div class="btn btn-outline-danger btn-sm">Delete</div>
+            </a>
+                }
+                }
+
+            </div>
+            @foreach (var Attendee in team.Attendees)
+            {
+        <div class="AttendeeName">
+            <p>@Html.DisplayFor(modelItem => Attendee.UserName)</p>
+            @if (UserManager.GetUserId(User) == Attendee.UserID)
+            {
+                <div class="btn btn-outline-danger btn-sm">Leave</div>
+            }
+        </div>
+            }
+        </div>
+    }
+</div>
+
+
+<a class="btn btn-primary" asp-action="Join" asp-route-id="@Model.TournamentId">
+    Join Tournament
+</a>
+
+<style>
+    .Tcontainer {
+        background: grey;
+        height: 40vh;
+        width: 100%;
+    }
+
+
+    .Pcontainer {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .teamwrap {
+        width: 200px;
+        border: 1px solid lightblue;
+        height: max-content;
+        margin: 12px;
+    }
+
+    .AttendeeName:nth-child(even) {
+        background: #add8e642;
+    }
+
+    .teamName {
+        color: white;
+        background: lightblue;
+        padding: 8px;
+    }
+
+    .teamName p{
+        margin: 0 0 8px 0;
+    }
+
+    .AttendeeName {
+        color: grey;
+        display: flex;
+        justify-content: space-between
+    }
+
+    .AttendeeName p{
+        margin: 0 0 0 4px;
+    }
+</style>
