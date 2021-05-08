@@ -11,7 +11,7 @@ namespace TournamentWeb.Models
         [Key]
         public int TeamId { get; set; }
         public string TeamName { get; set; }
-        public List<Attendees> Attendees { get; set; } = new List<Attendees>();
+        public ICollection<Attendees> Attendees { get; set; } = new List<Attendees>();
         public int MatchWins { get; set; }
         public bool LostGame { get; set; }
 
@@ -28,7 +28,7 @@ namespace TournamentWeb.Models
 
         }
 
-        public Teams(int TeamId, string TeamName, List<Attendees> Attendees,
+        public Teams(string TeamName, List<Attendees> Attendees,
             int MatchWins, bool LostGame)
         {
             this.TeamName = TeamName;

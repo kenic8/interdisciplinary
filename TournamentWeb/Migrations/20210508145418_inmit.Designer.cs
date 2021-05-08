@@ -10,8 +10,8 @@ using TournamentWeb.Data;
 namespace TournamentWeb.Migrations
 {
     [DbContext(typeof(TournamentWebContext))]
-    [Migration("20210506135924_withID")]
-    partial class withID
+    [Migration("20210508145418_inmit")]
+    partial class inmit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -197,9 +197,6 @@ namespace TournamentWeb.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
-                    b.Property<int>("Qualifications")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -224,6 +221,58 @@ namespace TournamentWeb.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("TournamentWeb.Models.Attendees", b =>
+                {
+                    b.Property<int>("AttendeeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("TeamsTeamId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AttendeeID");
+
+                    b.HasIndex("TeamsTeamId");
+
+                    b.ToTable("Attendees");
+                });
+
+            modelBuilder.Entity("TournamentWeb.Models.Teams", b =>
+                {
+                    b.Property<int>("TeamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("LostGame")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MatchWins")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TeamName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TournamentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeamId");
+
+                    b.HasIndex("TournamentId");
+
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("TournamentWeb.Models.Tournament", b =>
@@ -311,6 +360,30 @@ namespace TournamentWeb.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TournamentWeb.Models.Attendees", b =>
+                {
+                    b.HasOne("TournamentWeb.Models.Teams", null)
+                        .WithMany("Attendees")
+                        .HasForeignKey("TeamsTeamId");
+                });
+
+            modelBuilder.Entity("TournamentWeb.Models.Teams", b =>
+                {
+                    b.HasOne("TournamentWeb.Models.Tournament", null)
+                        .WithMany("Teams")
+                        .HasForeignKey("TournamentId");
+                });
+
+            modelBuilder.Entity("TournamentWeb.Models.Teams", b =>
+                {
+                    b.Navigation("Attendees");
+                });
+
+            modelBuilder.Entity("TournamentWeb.Models.Tournament", b =>
+                {
+                    b.Navigation("Teams");
                 });
 #pragma warning restore 612, 618
         }

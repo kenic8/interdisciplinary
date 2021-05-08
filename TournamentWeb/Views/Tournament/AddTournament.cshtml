@@ -1,0 +1,25 @@
+﻿
+@model Tournament
+<div class="bg-primary m-1 p-1 text-white"><h4>Create Tournament</h4></div>
+<div asp-validation-summary=" All" class="text-danger"></div>
+
+
+<form asp-action="AddTournament" asp-controller="Tournament" method="post">
+    
+    <div class="form-group">
+        <label asp-for="TimeFrame"> Start Time</label>
+        <input asp-for="TimeFrame" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TournamentName"></label>
+        <input asp-for="TournamentName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TournamentInfo"></label>
+        <textarea asp-for="TournamentInfo" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -61,7 +61,7 @@ namespace TournamentWeb
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
+            { 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Landing}/{action=Landingpage}/{id?}");

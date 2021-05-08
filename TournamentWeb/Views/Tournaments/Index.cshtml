@@ -1,0 +1,20 @@
+﻿@model IEnumerable<TournamentWeb.Models.Tournament>
+
+@{ ViewData["Title"] = "Tournaments"; }
+
+<h1>Tournaments</h1>
+
+<form asp-controller="Tournaments" asp-action="Index">
+    <p>
+        Title: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+
+@foreach (var item in Model)
+{
+    <a class="btn btn-light" asp-action="Details" asp-route-id="@item.TournamentId">
+        @Html.DisplayFor(modelItem => item.TournamentName)
+    </a>
+}

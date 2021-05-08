@@ -223,7 +223,7 @@ namespace TournamentWeb.Migrations
 
             modelBuilder.Entity("TournamentWeb.Models.Attendees", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("AttendeeID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -231,13 +231,16 @@ namespace TournamentWeb.Migrations
                     b.Property<int?>("TeamsTeamId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserStatus")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("AttendeeID");
 
                     b.HasIndex("TeamsTeamId");
 

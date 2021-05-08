@@ -1,13 +1,9 @@
 ﻿@model AppUser
 
 <h1> THis is the profile page!</h1>
-<div class="bg-primary m-1 p-1 text-white"
-     ><h4>@Model.UserName</h4></div>
-
-@if (Model != null)
-{
-
-}
+<div class="bg-primary m-1 p-1 text-white">
+<h4>@Model.PasswordHash</h4></div>
+<h4>@Model.UserName</h4>
 
 @if (Model.Email.ToString() == "admin@example.com")
 { 
@@ -16,7 +12,7 @@
 
 
 <section>
-info:Refer to model to get data here
+
 
 </section>
 

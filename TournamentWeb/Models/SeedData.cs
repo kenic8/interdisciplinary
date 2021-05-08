@@ -24,22 +24,26 @@ namespace TournamentWeb.Models
 
                 var Attendent1 = new Attendees(
                     "Teamleader",
-                    "Svenn"
+                    "Svenn",
+                    "someUserID"
                     );
 
                 var Attendent2 = new Attendees(
                     "fag",
-                    "Steven"
+                    "Steven",
+                    "someUserID"
                     );
 
                 var Attendent3 = new Attendees(
                     "Teamleader",
-                    "Kurt"
+                    "Kurt",
+                    "someUserID"
                     );
 
                 var Attendent4 = new Attendees(
                     "Fag",
-                    "Dennis"
+                    "Dennis",
+                    "someUserID"
                     );
 
 
@@ -54,7 +58,6 @@ namespace TournamentWeb.Models
                 Team2Attendees.Add(Attendent4);
 
                 var Team1 = new Teams(
-                    1,
                     "team1",
                     Team1Attendees,
                     0,
@@ -62,7 +65,6 @@ namespace TournamentWeb.Models
                     );
 
                 var Team2 = new Teams(
-                    2,
                     "team2",
                     Team2Attendees,
                     0,
