@@ -8,14 +8,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TournamentWeb.Controllers
 {
-    public class TournamentController : Controller
+    public class UsercheckController : Controller
     {
         ///get Current user from the context
         private Task<AppUser> CurrentUser =>
          userManager.FindByNameAsync(HttpContext.User.Identity.Name);
 
         private UserManager<AppUser> userManager;
-        public TournamentController(UserManager<AppUser> userMgr)
+        public UsercheckController(UserManager<AppUser> userMgr)
         {
             userManager = userMgr;
         }
@@ -29,7 +29,7 @@ namespace TournamentWeb.Controllers
                 AppUser user = await CurrentUser;
 
                 await userManager.UpdateAsync(user);
-                return View("AddTournament");
+                 return RedirectToAction("Addtournament", "AddTournament");
             }
             //return RedirectToAction("Accoount", "Login");
             return RedirectToAction("Landing", "Landingpage");

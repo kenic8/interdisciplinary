@@ -25,7 +25,7 @@ namespace TournamentWeb
                     var context = services.
                         GetRequiredService<TournamentWebContext>();
                     context.Database.Migrate();
-                    SeedData.Initialize(services);
+                    //SeedData.Initialize(services);
                 }
                 catch (Exception ex)
                 {
