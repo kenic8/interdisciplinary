@@ -24,8 +24,6 @@ namespace TournamentWeb.Controllers
 
             _context = context;
             _webHostEnviroment = webHostEnviroment;
-
-
         }
 
         public IActionResult AddTournament()
@@ -46,10 +44,9 @@ namespace TournamentWeb.Controllers
                     DateTime now = DateTime.Now;
                     string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
                     string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":","t");
-                    string folderProj = "/images/";
+                    string folderProj = "/images/tournaments/";
                     string UniqueName = Timetrimmed + objT.TournamentImageFile.FileName.ToString();
                     folderProj += UniqueName;
-
                     string serverFolder = _webHostEnviroment.WebRootPath+ folderProj;
                     objT.TournamentImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
 
@@ -59,8 +56,6 @@ namespace TournamentWeb.Controllers
                     _context.Add(objT);
                     _context.SaveChanges();
                     return RedirectToAction("Addtournament");
-
-
                 }
                 //objT.TournamentImage = null;
                 objT.Teams = new System.Collections.Generic.List<Teams>();

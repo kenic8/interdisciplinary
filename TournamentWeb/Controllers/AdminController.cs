@@ -6,8 +6,7 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
-using TournamentWeb.Data;
-using System;
+
 
 
 namespace TournamentWeb.Controllers
@@ -141,6 +140,7 @@ namespace TournamentWeb.Controllers
             }
             return View(user);
         }
+
 
 
 
