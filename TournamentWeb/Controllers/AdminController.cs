@@ -2,6 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using TournamentWeb.Data;
+using System;
 
 
 namespace TournamentWeb.Controllers
@@ -12,15 +18,19 @@ namespace TournamentWeb.Controllers
         private IUserValidator<AppUser> userValidator;
         private IPasswordValidator<AppUser> passwordValidator;
         private IPasswordHasher<AppUser> passwordHasher;
-        public AdminController(UserManager<AppUser> usrMgr,
+        private readonly IWebHostEnvironment _webHostEnviroment;
+
+        public AdminController(IWebHostEnvironment webHostEnviroment, UserManager<AppUser> usrMgr,
             IUserValidator<AppUser> userValid,
             IPasswordValidator<AppUser> passValid,
             IPasswordHasher<AppUser> passwordHash)
+
         {
             userManager = usrMgr;
             userValidator = userValid;
             passwordValidator = passValid;
             passwordHasher = passwordHash;
+            _webHostEnviroment = webHostEnviroment;
         }
 
         public ViewResult Index() => View(userManager.Users);
@@ -31,12 +41,27 @@ namespace TournamentWeb.Controllers
         /// create  users --- use this with tournament creater
         public async Task<IActionResult> Create(CreateModel model)
         {
+
+
             if (ModelState.IsValid)
             {
+                DateTime now = DateTime.Now;
+                string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
+                string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":", "t");
+                string folderProj = "/images/profile/";
+                string UniqueName = Timetrimmed + model.ProfileImageFile.FileName.ToString();
+                folderProj += UniqueName;
+                string serverFolder = _webHostEnviroment.WebRootPath + folderProj;
+                await model.ProfileImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                model.ProfileImage = UniqueName;
+
                 AppUser user = new AppUser
                 {
                     UserName = model.Name,
-                    Email = model.Email
+                    Email = model.Email,
+                    UserDiscord = model.UserDiscord,
+                    Points = model.Points,
+                    ProfileImage = model.ProfileImage
                 };
                 IdentityResult result = await userManager.CreateAsync(user, model.Password);
 
@@ -54,6 +79,8 @@ namespace TournamentWeb.Controllers
             }
             return View(model);
         }
+
+
 
 
         /// edit users -- use find async to find a user // if not create the user with create when creating a tournament.
@@ -114,6 +141,9 @@ namespace TournamentWeb.Controllers
             }
             return View(user);
         }
+
+
+
 
 
         [HttpPost]
