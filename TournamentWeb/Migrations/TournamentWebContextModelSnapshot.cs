@@ -195,6 +195,9 @@ namespace TournamentWeb.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
+                    b.Property<string>("ProfileImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 

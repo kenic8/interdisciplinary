@@ -13,6 +13,6 @@ namespace TournamentWeb.Models
     {
         public string UserDiscord { get; set; }
         public int Points { get; set; }
-
+        public string ProfileImage { get; internal set; }
     }
 }

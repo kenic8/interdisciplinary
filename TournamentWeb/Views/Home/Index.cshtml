@@ -3,7 +3,14 @@
 <h1> THis is the profile page!</h1>
 <div class="bg-primary m-1 p-1 text-white">
 <h4>@Model.PasswordHash</h4></div>
+username
 <h4>@Model.UserName</h4>
+points
+<h4> @Model.Points</h4>
+discord
+<h4> @Model.UserDiscord </h4>
+Profile Image
+<img src="~/images/profile/@Model.ProfileImage" alt="Alternate Text" />
 
 @if (Model.Email.ToString() == "admin@example.com")
 { 
