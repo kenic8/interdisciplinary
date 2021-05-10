@@ -468,3 +468,6 @@ C:\Users\carl-\OneDrive\Skrivebord\local repos\TournamentWeb\obj\Debug\net5.0\re
 C:\Users\carl-\OneDrive\Skrivebord\local repos\TournamentWeb\obj\Debug\net5.0\TournamentWeb.pdb
 C:\Users\carl-\OneDrive\Skrivebord\local repos\TournamentWeb\obj\Debug\net5.0\TournamentWeb.genruntimeconfig.cache
 C:\Users\carl-\OneDrive\Skrivebord\repos\Tournamanta\interdisciplinary\TournamentWeb\obj\Debug\net5.0\Razor\Views\Addtournament\AddTournament.cshtml.g.cs
+C:\Users\carl-\OneDrive\Skrivebord\repos\Tournamanta\interdisciplinary\TournamentWeb\obj\Debug\net5.0\Razor\Views\Shared\PopUp.cshtml.g.cs
+C:\Users\carl-\OneDrive\Skrivebord\repos\Tournamanta\interdisciplinary\TournamentWeb\obj\Debug\net5.0\Razor\Views\PopUps\AddPlayer.cshtml.g.cs
+C:\Users\carl-\OneDrive\Skrivebord\repos\Tournamanta\interdisciplinary\TournamentWeb\obj\Debug\net5.0\Razor\Views\PopUps\CreateTeam.cshtml.g.cs

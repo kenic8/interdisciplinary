@@ -296,6 +296,7 @@ namespace TournamentWeb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TournamentInfo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TournamentName")

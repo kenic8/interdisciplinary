@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TournamentWeb.Migrations
 {
-    public partial class inmit : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,13 +55,13 @@ namespace TournamentWeb.Migrations
                     TournamentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TournamentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TournamentImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TournamentInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TournamentInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TimeFrame = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ParticipantsAmount = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Bracketsize = table.Column<int>(type: "int", nullable: false)
+                    Bracketsize = table.Column<int>(type: "int", nullable: false),
+                    TournamentImage = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -3,13 +3,15 @@
 @inject UserManager<AppUser> UserManager
 @using Microsoft.AspNetCore.Identity;
 
+
+<div id="myTag"></div>
+
 <h1>
     @Model.TournamentName
 </h1>
 
 
-<div class="Tcontainer" style="background: url(images/tournemanet/@Model.TournamentImage)">
-    <img src="/images/@Model.TournamentImage"/>
+<div class="Tcontainer" style="background: url(/images/@Model.TournamentImage)">
 </div>
 
 <div class="bg-primary m-1 p-1 text-white">
@@ -25,32 +27,68 @@
                 <p>@Html.DisplayFor(modelItem => team.TeamName)</p>
                 @foreach (var Attendee in team.Attendees)
                 {
-                    @if (UserManager.GetUserId(User) == Attendee.UserID && Attendee.UserStatus == "TeamLeader") {
-            <a asp-action="Delete" asp-route-id="@Model.TournamentId" asp-route-TeamId="@team.TeamId">
-                <div class="btn btn-outline-danger btn-sm">Delete</div>
-            </a>
-                }
+                    @if (UserManager.GetUserId(User) == Attendee.UserID && Attendee.UserStatus == "TeamLeader")
+                    {
+                        <a asp-action="Delete" asp-route-id="@Model.TournamentId" asp-route-TeamId="@team.TeamId">
+                            <div class="btn btn-outline-danger btn-sm">Delete</div>
+                        </a>
+                    }
                 }
 
             </div>
             @foreach (var Attendee in team.Attendees)
             {
-        <div class="AttendeeName">
-            <p>@Html.DisplayFor(modelItem => Attendee.UserName)</p>
-            @if (UserManager.GetUserId(User) == Attendee.UserID)
-            {
-                <div class="btn btn-outline-danger btn-sm">Leave</div>
+                <div class="AttendeeName">
+                    <p>
+                        @Html.DisplayFor(modelItem => Attendee.UserName)
+                        @if (Attendee.UserStatus == "TeamLeader")
+                        {
+                            <span>(TL)</span>
+                        }
+
+                    </p>
+                    @if (UserManager.GetUserId(User) == Attendee.UserID)
+                    {
+                        <a asp-action="RemovePlayer" asp-route-id="@Model.TournamentId" asp-route-TeamId="@team.TeamId">
+                            <div class="btn btn-outline-danger btn-sm">Leave</div>
+                        </a>
+                    }
+                    //WRONG
+                    else
+                    {
+                        @foreach (var AttendeeN in team.Attendees)
+                        {
+                            if (AttendeeN.UserStatus == "TeamLeader" && UserManager.GetUserId(User) == AttendeeN.UserID)
+                            {
+                                <a id="dadatest" asp-action="RemovePlayer" asp-route-id="@Model.TournamentId" asp-route-TeamId="@team.TeamId" asp-route-UserID="@Attendee.UserID">
+                                    <div class="btn btn-outline-danger btn-sm">Remove</div>
+                                </a>
+                            }
+                        }
+                    }
+                </div>
             }
-        </div>
+            @for (int i = 0; i < 3 - team.Attendees.Count; i++)
+            {
+                    <div class="AttendeeName">
+                        <div id="UseShipAddr" onclick="testfuck(@Model.TournamentId, @team.TeamId, 0, 'AddPlayer')" class="btn btn-outline-primary btn-sm">Add</div>
+                    </div>
             }
         </div>
     }
 </div>
 
 
-<a class="btn btn-primary" asp-action="Join" asp-route-id="@Model.TournamentId">
+<button class="btn btn-primary" onclick="testfuck(@Model.TournamentId, 0, 0, 'CreateTeam')">
     Join Tournament
-</a>
+</button>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+
+</script>
 
 <style>
     .Tcontainer {
@@ -84,9 +122,9 @@
         padding: 8px;
     }
 
-    .teamName p{
-        margin: 0 0 8px 0;
-    }
+        .teamName p {
+            margin: 0 0 8px 0;
+        }
 
     .AttendeeName {
         color: grey;
@@ -94,7 +132,7 @@
         justify-content: space-between
     }
 
-    .AttendeeName p{
-        margin: 0 0 0 4px;
-    }
+        .AttendeeName p {
+            margin: 0 0 0 4px;
+        }
 </style>
