@@ -10,8 +10,8 @@ using TournamentWeb.Data;
 namespace TournamentWeb.Migrations
 {
     [DbContext(typeof(TournamentWebContext))]
-    [Migration("20210511092248_init")]
-    partial class init
+    [Migration("20210511094912_fff")]
+    partial class fff
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
