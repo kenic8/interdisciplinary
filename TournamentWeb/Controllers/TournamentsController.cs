@@ -8,7 +8,9 @@ using TournamentWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using TournamentWeb.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace TournamentWeb.Controllers
 {
@@ -18,10 +20,13 @@ namespace TournamentWeb.Controllers
 
         private UserManager<AppUser> userManager;
 
-        public TournamentsController(TournamentWebContext context, UserManager<AppUser> userMgr)
+        private readonly IWebHostEnvironment _webHostEnviroment;
+
+        public TournamentsController(IWebHostEnvironment webHostEnviroment, TournamentWebContext context, UserManager<AppUser> userMgr)
         {
             _context = context;
             userManager = userMgr;
+            _webHostEnviroment = webHostEnviroment;
         }
 
         [Authorize]
@@ -119,7 +124,7 @@ namespace TournamentWeb.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
-
+        
         [Authorize]
         public async Task<IActionResult> Join(int? id, Teams? Teamobj)
         {
@@ -128,6 +133,8 @@ namespace TournamentWeb.Controllers
             {
                 return NotFound();
             }
+
+       
 
 
             AppUser user = await CurrentUser;
@@ -143,6 +150,23 @@ namespace TournamentWeb.Controllers
             Team.Attendees = AttendeesList;
             Team.MatchWins = 0;
             Team.LostGame = false;
+          
+            
+
+            ///img stuff
+            ///
+            DateTime now = DateTime.Now;
+            string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
+            string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":", "t");
+            string folderProj = "/images/teams/";
+            string  UniqueName = Timetrimmed + Team.TeamImageFile.FileName.ToString();
+            folderProj += UniqueName;
+            string serverFolder = _webHostEnviroment.WebRootPath + folderProj;
+            await Team.TeamImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+            Team.TeamImage = UniqueName;
+
+
 
             //List<Teams> TeamList = new List<Teams>();
             //TeamList.Add(Team);
@@ -208,5 +232,8 @@ namespace TournamentWeb.Controllers
 
         private Task<AppUser> CurrentUser =>
         userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+        public IFormFile TeamImageFile { get; private set; }
+        public string TeamImage { get; private set; }
     }
 }

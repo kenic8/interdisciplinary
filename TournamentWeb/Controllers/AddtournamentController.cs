@@ -22,11 +22,11 @@ namespace TournamentWeb.Controllers
 
         public AddtournamentController(TournamentWebContext context,IWebHostEnvironment webHostEnviroment)
         {
-
             _context = context;
             _webHostEnviroment = webHostEnviroment;
         }
 
+        [Authorize]
         public IActionResult AddTournament()
         {
             Tournament objT = new Tournament();

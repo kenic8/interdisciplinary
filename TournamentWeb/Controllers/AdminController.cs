@@ -36,12 +36,11 @@ namespace TournamentWeb.Controllers
         public ViewResult Index() => View(userManager.Users);
 
         public ViewResult Create() => View();
-        [HttpPost]
 
+        [HttpPost]
         /// create  users --- use this with tournament creater
         public async Task<IActionResult> Create(RegisterViewModel model)
         {
-
 
             if (ModelState.IsValid)
             {

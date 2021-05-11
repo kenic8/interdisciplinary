@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,12 +23,14 @@ namespace TournamentWeb.Models
         }
 
         public Teams(string TeamName, List<Attendees> Attendees,
-            int MatchWins, bool LostGame)
+            int MatchWins, bool LostGame, string TeamImage, IFormFile TeamImageFile)
         {
             this.TeamName = TeamName;
             this.Attendees = Attendees;
             this.MatchWins = MatchWins;
             this.LostGame = LostGame;
+            this.TeamImage = TeamImage;
+            this.TeamImageFile = TeamImageFile;
         }
     }
 }
