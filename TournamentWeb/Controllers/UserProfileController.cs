@@ -4,72 +4,119 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using TournamentWeb.Data;
 using TournamentWeb.Models;
 using TournamentWeb.Models.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TournamentWeb.Controllers
 {
     public class UserProfileController : Controller
     {
-        private readonly TournamentWebContext _context;
+
         private UserManager<AppUser> userManager;
-        public UserProfileController(UserManager<AppUser> userMgr, TournamentWebContext context)
+        private readonly IWebHostEnvironment _webHostEnviroment;
+        public UserProfileController(UserManager<AppUser> userMgr, IWebHostEnvironment webHostEnviroment)
         {
             userManager = userMgr;
-            _context = context;
+            _webHostEnviroment = webHostEnviroment;
         }
-
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             AppUser user = await CurrentUser;
-            return View(user);
+
+            UserProfileViewModel model = new UserProfileViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                //Password = user.PasswordHash,
+                Points = user.Points,
+                UserDiscord = user.UserDiscord,
+                ProfileImage = user.ProfileImage,
+                ProfileImageFile = user.ProfileImageFile
+            };
+
+
+            return View(model);
         }
         //Get
         public async Task<IActionResult> Edit()
         {
             AppUser user = await CurrentUser;
-            if (user != null)
+            UserProfileViewModel model = new UserProfileViewModel()
             {
-                return View(user);
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                //Password = user.PasswordHash,
+                Points = user.Points,
+                UserDiscord = user.UserDiscord,
+                ProfileImage = user.ProfileImage,
+                ProfileImageFile = user.ProfileImageFile
+            };
+
+            return View(model);
         }
+
         //Post
         [HttpPost]
-        public async Task<IActionResult> Edit(AppUser model)
+        public async Task<IActionResult> Edit(UserProfileViewModel model)
         {
             AppUser user = await CurrentUser;
 
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                user.UserName = model.UserName;
-                user.Email = model.Email;
-                user.Points = model.Points;
-                user.UserDiscord = model.UserDiscord;
-                //user.ProfileImage = model.ProfileImage;
+                //Creating the IMG
+                await ProcessUploadImgFile(model);
 
-                IdentityResult result = await userManager.UpdateAsync(user);
-
-                if (result.Succeeded)
+                if (user != null)
                 {
-                    return RedirectToAction("Index");
+                    user.UserName = model.UserName;
+                    user.Email = model.Email;
+                    //user.PasswordHash = model.Password;
+                    user.UserDiscord = model.UserDiscord;
+                    user.ProfileImage = model.ProfileImage;
+
+                    IdentityResult result = await userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
             }
+
             return View();
         }
 
-        //public void SaveUser(AppUser user)
-        //{
-        //    var userfound = _context.AppUsers.FindAsync(user.Id);
-        //    USe
-        //} 
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            AppUser user = await userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                IdentityResult result = await userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+            }
+            return RedirectToAction("Index");
+        }
+        private async Task ProcessUploadImgFile(UserProfileViewModel model)
+        {
+            DateTime now = DateTime.Now;
+            string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
+            string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":", "t");
+            string folderProj = "/images/profile/";
+            string UniqueName = Timetrimmed + model.ProfileImageFile.FileName.ToString();
+            folderProj += UniqueName;
+            string serverFolder = _webHostEnviroment.WebRootPath + folderProj;
+            await model.ProfileImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+            model.ProfileImage = UniqueName;
+        }
 
         private Task<AppUser> CurrentUser =>
             userManager.FindByNameAsync(HttpContext.User.Identity.Name);
