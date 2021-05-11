@@ -9355,45 +9355,28 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\carl-\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
-=======
-    "C:\\Users\\marti\\.nuget\\packages\\": {}
->>>>>>> master
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\carl-\\OneDrive\\Skrivebord\\repos\\Tournamanta\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
       "projectName": "TournamentWeb",
       "projectPath": "C:\\Users\\carl-\\OneDrive\\Skrivebord\\repos\\Tournamanta\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
       "packagesPath": "C:\\Users\\carl-\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\carl-\\OneDrive\\Skrivebord\\repos\\Tournamanta\\interdisciplinary\\TournamentWeb\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\marti\\Documents\\Github\\Gproject New\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
-      "projectName": "TournamentWeb",
-      "projectPath": "C:\\Users\\marti\\Documents\\Github\\Gproject New\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
-      "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marti\\Documents\\Github\\Gproject New\\interdisciplinary\\TournamentWeb\\obj\\",
->>>>>>> master
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\carl-\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
-=======
-        "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
->>>>>>> master
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -9459,7 +9442,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

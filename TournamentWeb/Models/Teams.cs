@@ -16,6 +16,9 @@ namespace TournamentWeb.Models
         public ICollection<Attendees> Attendees { get; set; } = new List<Attendees>();
         public int MatchWins { get; set; }
         public bool LostGame { get; set; }
+        public string TeamImage { get; set; }
+        [NotMapped]
+        public IFormFile TeamImageFile { get; set; }
 
         public Teams()
         {

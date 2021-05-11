@@ -64,6 +64,8 @@ namespace TournamentWeb.Controllers
             .ThenInclude(u => u.Attendees)
             .FirstOrDefaultAsync(u => u.TournamentId == id.Value);
             var teamsTest = TTournament.Teams.FirstOrDefault(u => u.TeamId == TeamId.Value);
+
+
             // if Teamleader ->
             if (UserID == null)
             {
