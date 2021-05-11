@@ -16,8 +16,17 @@ namespace TournamentWeb.Controllers
             TempData["id1"] = id1;
             TempData["id2"] = id2;
             TempData["id3"] = id3;
-            TempData["PopupView"] = PopupView;
+
+            if (PopupView.Contains("Error")) {
+                TempData["PopupView"] = "Error";
+                TempData["ErrorMsg"] = "Error";
+            } else
+            {
+                TempData["PopupView"] = PopupView;
+            }
             return PartialView("PopUp");
         }
+
+        //add return action intead of frontend
     }
 }

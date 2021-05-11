@@ -15,14 +15,6 @@ namespace TournamentWeb.Models
         public int MatchWins { get; set; }
         public bool LostGame { get; set; }
 
-
-
-        //public void AddStatus( Attendees user, string status) // to users
-        //{
-        //    Attendees userFound = Attendees.FirstOrDefault(u => u.UserId == user.UserId);
-        //    userFound.UserStatus = status;
-
-        //}
         public Teams()
         {
 

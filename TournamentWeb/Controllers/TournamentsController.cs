@@ -42,12 +42,13 @@ namespace TournamentWeb.Controllers
                  user.UserName,
                  user.Id
                 );
-                List<Attendees> AttendeesList = new List<Attendees>();
+
                 teamsTest.Attendees.Add(Attendee);
 
                 _context.SaveChanges();
 
             }
+            // display message? succes or not?
             return RedirectToAction("Details", new { id = id });
         }
 
@@ -103,11 +104,6 @@ namespace TournamentWeb.Controllers
                 .ThenInclude(u => u.Attendees)
                 .FirstOrDefaultAsync(u => u.TournamentId == id.Value);
 
-
-
-            //var Tteams = TTournament.Teams.FirstOrDefault(u => u.TeamId == TeamId.Value);
-
-
             var TTeam = TTournament.Teams.FirstOrDefault(u => u.TeamId == TeamId.Value);
 
 
@@ -116,10 +112,7 @@ namespace TournamentWeb.Controllers
                 return NotFound();
             }
 
-
-
             TTournament.Teams.Remove(TTeam);
-
 
             // Dosnt delete in database only "unlinks" / fix with query string delete where id = NULL or something
             _context.SaveChanges();
@@ -146,39 +139,48 @@ namespace TournamentWeb.Controllers
             List<Attendees> AttendeesList = new List<Attendees>();
             AttendeesList.Add(Attendee);
 
-            //Teams Team = new Teams(
-            //    "placeholderTeamName",
-            //    AttendeesList,
-            //    0,
-            //    false
-            //);
-
             Teams Team = Teamobj;
             Team.Attendees = AttendeesList;
             Team.MatchWins = 0;
             Team.LostGame = false;
 
-            List<Teams> TeamList = new List<Teams>();
-            TeamList.Add(Team);
+            //List<Teams> TeamList = new List<Teams>();
+            //TeamList.Add(Team);
 
-            var TournamentToUpdate = await _context.Tournament.FirstOrDefaultAsync(i => i.TournamentId == id.Value);
+            var TournamentToUpdate = await _context.Tournament.Include(u => u.Teams)
+                .ThenInclude(u => u.Attendees)
+                .FirstOrDefaultAsync(i => i.TournamentId == id.Value);
 
 
-            TournamentToUpdate.Teams = TeamList;
-            _context.SaveChanges();
+            //shitty query :(
+            var tatatata = TournamentToUpdate.Teams.Any(i => i.Attendees.Any(u => u.UserID == user.Id) == true);
 
-            return RedirectToAction("Details", new { id = id });
+            // do something to make it clear why you cant make a team frontend stuff
+            string error = null;
+            if (!tatatata)
+            {
+                TournamentToUpdate.Teams.Add(Team);
+                _context.SaveChanges();
+            } else
+            {
+                error = "AddPlayerError";
+            }
+
+
+            return RedirectToAction("Details", new { id = id, error = error });
         }
 
 
 
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, string? error)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+            ViewBag.error = error;
 
             var Tournament = await _context.Tournament.Include(i => i.Teams)
                 .ThenInclude(u => u.Attendees)

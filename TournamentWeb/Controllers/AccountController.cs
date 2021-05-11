@@ -1,25 +1,33 @@
 ﻿using TournamentWeb.Models;
+using TournamentWeb.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using System.Net;
+using System.Security.Claims;
 
 namespace TournamentWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
-        public AccountController(UserManager<AppUser> userMgr,
-        SignInManager<AppUser> signinMgr)
+
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
-            _userManager = userMgr;
-            _signInManager = signinMgr;
+            UserManager = userManager;
+            SignInManager = signInManager;
         }
 
+        public UserManager<AppUser> UserManager { get; private set; }
+        public SignInManager<AppUser> SignInManager { get; private set; }
+
         [AllowAnonymous]
-        public IActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl)
         {
             ViewBag.returnUrl = returnUrl;
             return View();
@@ -28,37 +36,99 @@ namespace TournamentWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel details)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-
-                AppUser user = await _userManager.FindByEmailAsync(details.Email);
-                if (user==null)
+                var user = await UserManager.FindByNameAsync(model.UserName);
+                if (user != null)
                 {
-                    return RedirectToAction("Create", "Admin");
-                }
-                else if (user != null)
-                {
-                    await _signInManager.SignOutAsync();
+                    await SignInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result =
-                        await _signInManager.PasswordSignInAsync(user, details.Password, false, false);
+                        await SignInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Landingpage", "Landing");
+                        return RedirectToLocal(returnUrl);
                     }
-                 
                 }
-                ModelState.AddModelError(nameof(LoginModel.Email), "Invalid user or password");
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password.");
+                }
             }
-            return View(details);
+            return View(model);
         }
+
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new AppUser() { 
+                    UserName = model.UserName,
+                    Email = model.Email
+                };
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignOutAsync();
+                    Microsoft.AspNetCore.Identity.SignInResult Loginresult =
+                        await SignInManager.PasswordSignInAsync(user, model.Password, false, false);
+                    return RedirectToAction("Landingpage", "Landing");
+                }
+                else
+                {
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+
+            }
+        }
+
+
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Landingpage", "Landing");
+            }
+        }
+
 
         [Authorize]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            await SignInManager.SignOutAsync();
+            return RedirectToAction("Landingpage", "Landing");
         }
 
         [AllowAnonymous]

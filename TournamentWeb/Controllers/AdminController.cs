@@ -1,4 +1,5 @@
 ﻿using TournamentWeb.Models;
+using TournamentWeb.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace TournamentWeb.Controllers
         [HttpPost]
 
         /// create  users --- use this with tournament creater
-        public async Task<IActionResult> Create(CreateModel model)
+        public async Task<IActionResult> Create(RegisterViewModel model)
         {
 
 
@@ -56,7 +57,7 @@ namespace TournamentWeb.Controllers
 
                 AppUser user = new AppUser
                 {
-                    UserName = model.Name,
+                    UserName = model.UserName,
                     Email = model.Email,
                     UserDiscord = model.UserDiscord,
                     Points = model.Points,

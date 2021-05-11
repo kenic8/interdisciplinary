@@ -31,8 +31,10 @@
             }
             else
             {
-                <a asp-controller="Account" asp-action="Login"
+                <a onclick="testfuck(0, 0, 0, 'LogIn')"
                    class="btn btn-light">Login</a>
+                <a asp-controller="Account" asp-action="Register"
+                   class="btn btn-primary">Register</a>
             }
         </nav>
     </header>
@@ -54,7 +56,8 @@
 
     <script>
         //popups
-            function testfuck(id1, id2, id3, PopupVIew) {
+        function testfuck(id1, id2, id3, PopupVIew) {
+            console.log("loaded")
                 $.ajax({
                     url: "@Url.Action("InitPopUp", "Popup")",
                     type: "POST",
