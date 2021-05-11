@@ -57,23 +57,24 @@ namespace TournamentWeb.Models
                 Team2Attendees.Add(Attendent3);
                 Team2Attendees.Add(Attendent4);
 
-                var Team1 = new Teams(
-                    "team1",
-                    Team1Attendees,
-                    0,
-                    false
-                    );
+                //var Team1 = new Teams(
+                
+                //    "team1",
+                //    Team1Attendees,
+                //    0,
+                //    false
+                //    );
 
-                var Team2 = new Teams(
-                    "team2",
-                    Team2Attendees,
-                    0,
-                    false
-                    );
+                //var Team2 = new Teams(
+                //    "team2",
+                //    Team2Attendees,
+                //    0,
+                //    false
+                //    );
 
-                var Teamssa = new List<Teams>();
-                Teamssa.Add(Team1);
-                Teamssa.Add(Team2);
+                //var Teamssa = new List<Teams>();
+                //Teamssa.Add(Team1);
+                //Teamssa.Add(Team2);
 
                 context.Tournament.AddRange(
                     new Tournament
@@ -86,7 +87,7 @@ namespace TournamentWeb.Models
                         ParticipantsAmount = 0,
                         UserId = "CreatorUserString",
                         Bracketsize = 4,
-                        Teams = Teamssa
+                        //Teams = Teamssa
                     }
                 );
                 context.SaveChanges();

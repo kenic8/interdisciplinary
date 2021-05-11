@@ -263,6 +263,9 @@ namespace TournamentWeb.Migrations
                     b.Property<int>("MatchWins")
                         .HasColumnType("int");
 
+                    b.Property<string>("TeamImage")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TeamName")
                         .HasColumnType("nvarchar(max)");
 

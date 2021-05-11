@@ -6,8 +6,7 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
-using TournamentWeb.Data;
-using System;
+
 
 
 namespace TournamentWeb.Controllers
@@ -36,12 +35,11 @@ namespace TournamentWeb.Controllers
         public ViewResult Index() => View(userManager.Users);
 
         public ViewResult Create() => View();
-        [HttpPost]
 
+        [HttpPost]
         /// create  users --- use this with tournament creater
         public async Task<IActionResult> Create(CreateModel model)
         {
-
 
             if (ModelState.IsValid)
             {
@@ -141,6 +139,7 @@ namespace TournamentWeb.Controllers
             }
             return View(user);
         }
+
 
 
 

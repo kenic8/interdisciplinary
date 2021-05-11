@@ -1,0 +1,8 @@
+
+*.cache
+
+TournamentWeb/obj/Debug/net5.0/TournamentWeb.dll
+
+*.dll
+
+*.pdb

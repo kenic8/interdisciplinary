@@ -26,17 +26,18 @@
             </div>
             @if (User?.Identity?.IsAuthenticated ?? false)
             {
-             <a asp-controller="Account" asp-action="Logout"
-             class="btn btn-danger">Logout</a>            
-             } else
+                <a asp-controller="Account" asp-action="Logout"
+                   class="btn btn-danger">Logout</a>
+            }
+            else
             {
-             <a asp-controller="Account" asp-action="Login"
-             class="btn btn-light">Login</a>     
+                <a asp-controller="Account" asp-action="Login"
+                   class="btn btn-light">Login</a>
             }
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3"> 
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
@@ -49,6 +50,31 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    <script>
+        //popups
+            function testfuck(id1, id2, id3, PopupVIew) {
+                $.ajax({
+                    url: "@Url.Action("InitPopUp", "Popup")",
+                    type: "POST",
+                    data: {
+                        'id1': id1,
+                        'id2': id2,
+                        'id3': id3,
+                        'PopupView': PopupVIew,
+                    },
+            /*        data: { "Id": 1 },  */
+                    success: function (result) {
+                $("BODY").prepend("<div class='PopUp'>" + result + "</div>");
+            }
+        })
+    }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<style>
+
+</style>
