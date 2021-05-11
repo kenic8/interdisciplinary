@@ -10,8 +10,8 @@ using TournamentWeb.Data;
 namespace TournamentWeb.Migrations
 {
     [DbContext(typeof(TournamentWebContext))]
-    [Migration("20210510084804_newinit")]
-    partial class newinit
+    [Migration("20210511081835_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -264,6 +264,9 @@ namespace TournamentWeb.Migrations
 
                     b.Property<int>("MatchWins")
                         .HasColumnType("int");
+
+                    b.Property<string>("TeamImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TeamName")
                         .HasColumnType("nvarchar(max)");
