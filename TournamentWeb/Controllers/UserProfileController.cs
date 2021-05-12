@@ -12,6 +12,7 @@ using TournamentWeb.Models.ViewModels;
 
 namespace TournamentWeb.Controllers
 {
+    
     public class UserProfileController : Controller
     {
 
@@ -22,6 +23,7 @@ namespace TournamentWeb.Controllers
             userManager = userMgr;
             _webHostEnviroment = webHostEnviroment;
         }
+        
         public async Task<IActionResult> Index()
         {
             AppUser user = await CurrentUser;
@@ -42,6 +44,7 @@ namespace TournamentWeb.Controllers
             return View(model);
         }
         //Get
+        //[Route("Edit")]
         public async Task<IActionResult> Edit()
         {
             AppUser user = await CurrentUser;
@@ -100,7 +103,7 @@ namespace TournamentWeb.Controllers
                 IdentityResult result = await userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("Register", "Account");
                 }
             }
             return RedirectToAction("Index");

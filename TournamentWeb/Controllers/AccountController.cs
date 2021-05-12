@@ -75,7 +75,9 @@ namespace TournamentWeb.Controllers
             {
                 var user = new AppUser() { 
                     UserName = model.UserName,
-                    Email = model.Email
+                    Email = model.Email,
+                    ProfileImage = model.ProfileImage,
+                    ProfileImageFile = model.ProfileImageFile
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
