@@ -37,6 +37,7 @@ namespace TournamentWeb.Controllers
             var TTournament = await _context.Tournament.Include(u => u.Teams)
             .ThenInclude(u => u.Attendees)
             .FirstOrDefaultAsync(u => u.TournamentId == id.Value);
+         
             var teamsTest = TTournament.Teams.FirstOrDefault(u => u.TeamId == TeamId.Value);
             var UserInTeam = teamsTest.Attendees.FirstOrDefault(u => u.UserID == user.Id);
 
@@ -98,9 +99,6 @@ namespace TournamentWeb.Controllers
         }
 
             
-
-
-
         public async Task<IActionResult> Delete(int? id, int? TeamId)
         {
             if (id == null)
@@ -170,7 +168,6 @@ namespace TournamentWeb.Controllers
                 ///img stuff
                 ///
              
-
 
 
             //List<Teams> TeamList = new List<Teams>();

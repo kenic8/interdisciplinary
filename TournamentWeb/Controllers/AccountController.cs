@@ -16,11 +16,12 @@ namespace TournamentWeb.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly IWebHostEnvironment _webHostEnviroment;
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IWebHostEnvironment webHostEnviroment)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _webHostEnviroment = webHostEnviroment;
         }
 
         public UserManager<AppUser> UserManager { get; private set; }
@@ -73,9 +74,28 @@ namespace TournamentWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                if (model.ProfileImageFile != null)
+                {
+                    DateTime now = DateTime.Now;
+                    string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
+                    string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":", "t");
+                    string folderProj = "/images/profile/";
+                    string UniqueName = Timetrimmed + model.ProfileImageFile.FileName.ToString();
+                    folderProj += UniqueName;
+                    string serverFolder = _webHostEnviroment.WebRootPath + folderProj;
+                    await model.ProfileImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    model.ProfileImage = UniqueName;
+                }
+
+
+
                 var user = new AppUser() { 
                     UserName = model.UserName,
-                    Email = model.Email
+                    Email = model.Email,
+                    UserDiscord = model.UserDiscord,
+                    Points = model.Points,
+                    ProfileImage = model.ProfileImage
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

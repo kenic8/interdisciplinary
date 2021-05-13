@@ -58,7 +58,7 @@ namespace TournamentWeb.Controllers
                     _context.SaveChanges();
                     return RedirectToAction("Addtournament");
                 }
-                //objT.TournamentImage = null;
+              
                 objT.Teams = new System.Collections.Generic.List<Teams>();
                 _context.Add(objT);
                 _context.SaveChanges();
