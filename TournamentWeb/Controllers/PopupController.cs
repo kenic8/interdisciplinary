@@ -18,8 +18,9 @@ namespace TournamentWeb.Controllers
             TempData["id3"] = id3;
 
             if (PopupView.Contains("Error")) {
-                TempData["PopupView"] = "Error";
-                TempData["ErrorMsg"] = "Error";
+                string[] tmp = PopupView.Split('-');
+                TempData["PopupView"] = tmp[0];
+                TempData["ErrorMsg"] = tmp[1];
             } else
             {
                 TempData["PopupView"] = PopupView;

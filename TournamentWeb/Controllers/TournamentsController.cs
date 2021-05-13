@@ -38,9 +38,11 @@ namespace TournamentWeb.Controllers
             .ThenInclude(u => u.Attendees)
             .FirstOrDefaultAsync(u => u.TournamentId == id.Value);
             var teamsTest = TTournament.Teams.FirstOrDefault(u => u.TeamId == TeamId.Value);
-            var UserInTeam = teamsTest.Attendees.FirstOrDefault(u => u.UserID == user.Id);
+            var UserInATeam = TTournament.Teams.Any(i => i.Attendees.Any(u => u.UserID == user.Id) == true);
 
-            if (UserInTeam == null)
+
+            string error = null;
+            if (!UserInATeam)
             {
                 var Attendee = new Attendees(
                 "standard",
@@ -52,13 +54,16 @@ namespace TournamentWeb.Controllers
 
                 _context.SaveChanges();
 
+            } else
+            {
+                error = "Error-PlayerIsInTournament";
             }
             // display message? succes or not?
-            return RedirectToAction("Details", new { id = id });
+            return RedirectToAction("Details", new { id = id, error = error });
         }
 
 
-        public async Task<IActionResult> RemovePlayer(int? id, int? TeamId, string? UserID)
+        public async Task<IActionResult> RemovePlayer(int? id, int? TeamId, string UserID)
         {
              var TTournament = await _context.Tournament.Include(u => u.Teams)
             .ThenInclude(u => u.Attendees)
@@ -128,7 +133,7 @@ namespace TournamentWeb.Controllers
 
         
         [Authorize]
-        public async Task<IActionResult> Join(int? id, Teams? Teamobj)
+        public async Task<IActionResult> Join(int? id, Teams Teamobj)
         {
 
             if (id == null)
@@ -187,9 +192,10 @@ namespace TournamentWeb.Controllers
             {
                 TournamentToUpdate.Teams.Add(Team);
                 _context.SaveChanges();
-            } else
+            }
+            else
             {
-                error = "AddPlayerError";
+                error = "Error-PlayerIsInTournament";
             }
 
 
@@ -199,7 +205,7 @@ namespace TournamentWeb.Controllers
 
 
 
-        public async Task<IActionResult> Details(int? id, string? error)
+        public async Task<IActionResult> Details(int? id, string error)
         {
             if (id == null)
             {

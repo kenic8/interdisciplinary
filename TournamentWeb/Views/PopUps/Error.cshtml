@@ -1,6 +1,6 @@
-﻿@model TournamentWeb.Models.ViewModels.Errors
+﻿
 <div class="PopupBox">
-    <p>@(Model.AddPlayer)</p>
+    <p id="ErrorMsg" data-error="@TempData["ErrorMsg"]"></p>
 </div>
 
 <style>
@@ -15,3 +15,14 @@
         top: 50%;
     }
 </style>
+
+<script>
+    let errorModel = new Object();
+    errorModel.PlayerIsInTournament = "You are allready part of a team in this tournament";
+    if ($('#ErrorMsg').length) {
+        $("#ErrorMsg").ready(function () {
+            console.log(errorModel[$("#ErrorMsg").data("error")], errorModel["AddPlayer"])
+            $("#ErrorMsg").html(errorModel[$("#ErrorMsg").data("error")]);
+        })
+    }
+</script>
