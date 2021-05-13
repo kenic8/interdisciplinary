@@ -4,13 +4,12 @@
 <div class="bg-primary m-1 p-1 text-white"><h4>Create Tournament</h4></div>
 <div asp-validation-summary=" All" class="text-danger"></div>
 
-@*get user*@
+
 
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 
 
-@*@UserManager.GetUserId(User);*@
 
 <form asp-action="AddTournament" asp-controller="Addtournament" method="post" enctype="multipart/form-data">
 
@@ -43,7 +42,7 @@
     </div>
 
     <div class="form-group">
-        <input type="hidden" asp-for="UserId" value="@UserManager.GetUserId(User);" class="form-control" />
+        <input type="hidden" asp-for="UserId" value="@UserManager.GetUserId(User)" class="form-control" />
     </div>
 
 

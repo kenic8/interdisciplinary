@@ -18,6 +18,10 @@ namespace TournamentWeb.Data
 
         public DbSet<Tournament> Tournament { get; set; }
 
+        public DbSet<Attendees> Attendees { get; set; }
+
+        public DbSet<Teams> Teams { get; set; }
+
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
         {

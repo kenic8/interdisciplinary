@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+}
+@{
+    if (ViewBag.CreatedTournaments.Count != 0)
+        {
+            <p>Your Tournaments created</p>
+
+            @foreach (var T in ViewBag.CreatedTournaments)
+            {
+                <a class="flex-inner" href="#" style="text-decoration:none">
+                    <div class="side1">
+                        @if (T.TournamentImage != null)
+                        {
+                            <img src="/images/tournaments/@T.TournamentImage">
+                        }
+                    </div>
+                    <div class="side2">
+                        <h2>@T.TournamentName</h2>
+                        <p>@T.TimeFrame</p>
+                    </div>
+                </a>
+            }
+        }
+
+    if (ViewBag.joinedTournaments.Count != 0)
+    {
+        <p>Your joined tournaments</p>
+        @foreach (var f in ViewBag.joinedTournaments)
+        {
+            <a class="flex-inner" href="#" style="text-decoration:none">
+                <div class="side1">
+                    @if (f.TournamentImage != null)
+                    {
+                        <img src="/images/tournaments/@f.TournamentImage">
+                    }
+                </div>
+                <div class="side2">
+                    <h2>@f.TournamentName</h2>
+                    <p>@f.TimeFrame</p>
+                </div>
+            </a>
+            }
+        }
+    else
+    {
+        <p> No active tournaments</p>
+    }
+}
+
+
+
+
+
+<style>
+    .flex-inner {
+        width: 100%;
+        height: 20vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+    }
+
+        .flex-inner > h1, h2 {
+            font-size: 1em;
+        }
+
+
+        .flex-inner > a {
+            text-decoration: none;
+        }
+
+
+        .flex-inner > h2 {
+            font-size: 0.5em;
+        }
+
+        .flex-inner > .side1 {
+            width: 45%;
+        }
+
+
+            .flex-inner > .side1 > img {
+                width: 100%;
+                height: auto;
+                padding: 5%;
+            }
+
+        .flex-inner > .side2 {
+            width: 45%;
+            height: auto;
+        }
+
+            .flex-inner > .side2 > p {
+                font-size: 1em;
+            }
+</style>
+

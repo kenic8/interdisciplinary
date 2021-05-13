@@ -37,6 +37,7 @@ namespace TournamentWeb.Controllers
             var TTournament = await _context.Tournament.Include(u => u.Teams)
             .ThenInclude(u => u.Attendees)
             .FirstOrDefaultAsync(u => u.TournamentId == id.Value);
+         
             var teamsTest = TTournament.Teams.FirstOrDefault(u => u.TeamId == TeamId.Value);
             var UserInATeam = TTournament.Teams.Any(i => i.Attendees.Any(u => u.UserID == user.Id) == true);
 
@@ -103,9 +104,6 @@ namespace TournamentWeb.Controllers
         }
 
             
-
-
-
         public async Task<IActionResult> Delete(int? id, int? TeamId)
         {
             if (id == null)
@@ -157,22 +155,24 @@ namespace TournamentWeb.Controllers
             Team.Attendees = AttendeesList;
             Team.MatchWins = 0;
             Team.LostGame = false;
-          
-            
 
-            ///img stuff
-            ///
-            DateTime now = DateTime.Now;
-            string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
-            string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":", "t");
-            string folderProj = "/images/teams/";
-            string  UniqueName = Timetrimmed + Team.TeamImageFile.FileName.ToString();
-            folderProj += UniqueName;
-            string serverFolder = _webHostEnviroment.WebRootPath + folderProj;
-            await Team.TeamImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
 
-            Team.TeamImage = UniqueName;
+            if (Team.TeamImageFile != null)
+            {
+                DateTime now = DateTime.Now;
+                string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
+                string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":", "t");
+                string folderProj = "/images/teams/";
+                string UniqueName = Timetrimmed + Team.TeamImageFile.FileName.ToString();
+                folderProj += UniqueName;
+                string serverFolder = _webHostEnviroment.WebRootPath + folderProj;
+                await Team.TeamImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
 
+                Team.TeamImage = UniqueName;
+            }
+                ///img stuff
+                ///
+             
 
 
             //List<Teams> TeamList = new List<Teams>();
