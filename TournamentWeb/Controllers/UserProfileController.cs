@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using TournamentWeb.Data;
 using TournamentWeb.Models;
 using TournamentWeb.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TournamentWeb.Controllers
 {
@@ -24,6 +25,7 @@ namespace TournamentWeb.Controllers
             _webHostEnviroment = webHostEnviroment;
         }
         
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             AppUser user = await CurrentUser;

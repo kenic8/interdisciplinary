@@ -13,21 +13,21 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\marti\Documents\Github\Gproject New\interdisciplinary\TournamentWeb\Views\_ViewImports.cshtml"
+#line 1 "C:\Users\lille\Desktop\skole repo\interdisciplinary\TournamentWeb\Views\_ViewImports.cshtml"
 using TournamentWeb;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\marti\Documents\Github\Gproject New\interdisciplinary\TournamentWeb\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\lille\Desktop\skole repo\interdisciplinary\TournamentWeb\Views\_ViewImports.cshtml"
 using TournamentWeb.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\marti\Documents\Github\Gproject New\interdisciplinary\TournamentWeb\Views\Addtournament\AddTournament.cshtml"
+#line 3 "C:\Users\lille\Desktop\skole repo\interdisciplinary\TournamentWeb\Views\Addtournament\AddTournament.cshtml"
 using Microsoft.AspNetCore.Identity;
 
 #line default
@@ -88,7 +88,7 @@ using Microsoft.AspNetCore.Identity;
             __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
             __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper);
 #nullable restore
-#line 5 "C:\Users\marti\Documents\Github\Gproject New\interdisciplinary\TournamentWeb\Views\Addtournament\AddTournament.cshtml"
+#line 5 "C:\Users\lille\Desktop\skole repo\interdisciplinary\TournamentWeb\Views\Addtournament\AddTournament.cshtml"
 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper.ValidationSummary = global::Microsoft.AspNetCore.Mvc.Rendering.ValidationSummary. All;
 
 #line default
@@ -386,7 +386,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 }
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
-                WriteLiteral("\n");
+                WriteLiteral("\r\n");
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper>();
@@ -407,7 +407,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
             }
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
-            WriteLiteral("\n\n\n");
+            WriteLiteral("\r\n\r\n\r\n");
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
