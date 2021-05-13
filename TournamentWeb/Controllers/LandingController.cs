@@ -8,10 +8,18 @@ namespace TournamentWeb.Controllers
     public class LandingController : Controller
     {
 
+
         public IActionResult Landingpage()
         {
-          
-            return View();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                return View("LoggedInLanding");
+            }
+            else
+            {
+                return View();
+            }
         }
 
     }

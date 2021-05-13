@@ -1,0 +1,250 @@
+﻿
+
+
+@{
+    ViewData["Title"] = "LoggedInLanding";
+}
+
+<h1>LoggedInLanding</h1>
+
+@*Look at the controller du find the redirect action method named accordingly*@
+<a class="nav-link text-dark" asp-area="" asp-controller="Addtournament" asp-action="AddTournament"> Create Tournament</a>
+<a class="nav-link text-dark" asp-area="" asp-controller="UserProfile" asp-action="Index"> Profile</a>
+
+@*<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Create Tournament</a>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Profile</a>*@
+
+
+
+
+<div class="slider" ondrag="slide(event, this)" onmouseenter="slide(event, this)" ontouchmove="slide(event,this)">
+    <div class="slider-inner" id="sliderinner">
+        <a href="#">
+            <div class="slide-img">
+                <p class="img-text">blabla</p>
+                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="slide-img">
+                <p class="img-text">blabla</p>
+                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="slide-img">
+                <p class="img-text">blabla</p>
+                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="slide-img">
+                <p class="img-text">blabla</p>
+                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="slide-img">
+                <p class="img-text">blabla</p>
+                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
+            </div>
+        </a>
+
+    </div>
+</div>
+
+
+
+
+@*@if (User?.Identity?.IsAuthenticated ?? false)
+    {
+        <a asp-controller="Account" asp-action="Logout"
+           class="btn btn-danger">Logout</a>
+    }*@
+
+
+
+
+<style>
+  /*  .flex-container {
+        display: flex;
+        flex-wrap: nowrap;
+        background-color: DodgerBlue;
+        width: 100%;
+    }
+
+        .flex-container > div {
+            background-color: #f1f1f1;
+            width: 100px;
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+            font-size: 30px;
+        }*/
+
+    /*#Gallery-Img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+
+
+    div {
+        width: 45%;
+        height: auto;
+        text-align: center;
+        font-size: 1.5em;
+        padding-bottom: 5vh;
+        align-items: center;
+
+
+        .img-text {
+            color:yellow;
+            position: relative;
+            z-index: 99999;
+            transform: translateY(-10%)
+        }
+    }
+}
+
+
+
+.flex-container-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+
+
+    div {
+        width: 20%;
+        height: auto;
+        text-align: center;
+        font-size: 1.5em;
+        padding-bottom: 5vh;
+        align-items: center;
+
+
+        .img-text {
+            color: yellow;
+            position: relative;
+            z-index: 99999;
+            transform: translateY(-10%)
+        }
+    }
+}*/
+
+
+    .slider {
+        position: relative;
+        left: 10%;
+        top: 30%;
+        width: 80%;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    h1{
+        margin-top:10%;
+    }
+    .slider-inner {
+        position: relative;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 200%;
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
+        grid-gap: 5px;
+        pointer-events: none;
+        transition: 0s ease-in;
+    }
+
+        .slider-inner > .slide-img {
+            width: 100%;
+            height: 200px;
+        }
+
+            .slider-inner > .slide-img > .img-text {
+                color: yellow;
+                position: relative;
+                z-index: 99999;
+                transform: translate3d(30%,20vh,0)
+            }
+  
+
+</style>
+
+
+
+<script defer>
+    function slide(e, drag) {
+        this.drag = drag;
+        this.draginner = drag.children[0];
+        this.pressed = false;
+        this.startx;
+        this.x;
+        this.drag.addEventListener('mousedown', (e) => {
+            this.pressed = true;
+            this.startx = e.offsetX - this.draginner.offsetLeft;
+            this.drag.style.cursor = 'grabbing';
+        });
+
+        this.drag.addEventListener('mouseup', () => {
+            this.drag.style.cursor = 'grab';
+        });
+        this.drag.addEventListener('mouseup', () => {
+            this.pressed = false;
+        });
+        this.drag.addEventListener('mousemove', (e) => {
+            if (!this.pressed) return;
+            e.preventDefault();
+            x = e.offsetX;
+            this.draginner.style.left = `${x - this.startx}px `;
+            overflowcheck();
+        });
+
+        ///mobile  clientX
+
+        var clientX
+
+        this.drag.addEventListener('touchstart', (e) => {
+            this.pressed = true;
+            clientX = e.touches[0].clientX;
+            this.startx = clientX - this.draginner.offsetLeft;
+        });
+        this.drag.addEventListener('touchend', () => {
+            this.pressed = false;
+        });
+        this.drag.addEventListener('touchmove', (e) => {
+            if (!e) return;
+            e.preventDefault();
+            clientX = e.touches[0].clientX;
+            this.draginner.style.left = `${clientX - this.startx}px `;
+            overflowcheck();
+        });
+        function overflowcheck() {
+            outer = this.drag.getBoundingClientRect();
+            inner = this.draginner.getBoundingClientRect();
+            if (parseInt(this.draginner.style.left) > 0) {
+                this.draginner.style.left = '0px'
+            } else if (inner.right < outer.right) {
+                this.draginner.style.left = `-${inner.width - outer.width}px`
+            }
+        }
+    }
+</script>
+
+
