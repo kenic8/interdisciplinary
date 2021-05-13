@@ -61,12 +61,26 @@ namespace TournamentWeb
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            { 
+            {
+                endpoints.MapControllerRoute(
+                    name: "Tournaments",
+                    pattern: "Tournaments",
+                    defaults: new { Controller = "Tournaments", Action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "Profile",
+                    pattern: "Profile",
+                    defaults: new { Controller = "UserProfile", Action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: "Profile",
+                    pattern: "Profile/{action}",
+                    defaults: new { Controller = "UserProfile" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Landing}/{action=Landingpage}/{id?}");
             });
-
 
         }
     }
