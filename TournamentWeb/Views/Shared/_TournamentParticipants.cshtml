@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model TournamentWeb.Models.Tournament
+<div class="bg-primary m-1 p-1 text-white">
+    <h4> Participants</h4>
+    <dl class="row">
+        @if (Model.Teams.Count > 0)
+        {
+            @foreach (var teams in Model.Teams)
+            {
+                @foreach (var attendes in teams.Attendees)
+                {
+                    <dt class="col-sm-2">
+                        @attendes.UserName
+                    </dt>
+                    <dt class="col-sm-2">
+                        @attendes.UserStatus
+                    </dt>
+                }
+            }
+        }
+        else
+        {
+            {
+                <p> No teams added yet to the tournament!</p>
+            }
+        }
+           
+    </dl>
+</div>
+@await Html.PartialAsync("_AddPlayersToTournament")
+
+
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model.AttendeeID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@
