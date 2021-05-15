@@ -3,9 +3,10 @@
     ViewData["Title"] = "View";
 }
 @{
-    if (ViewBag.CreatedTournaments.Count != 0)
+    <div class="containerS">
+        @if (ViewBag.CreatedTournaments.Count != 0)
         {
-            <p>Your Tournaments created</p>
+            <h2 style="margin-left:2%;" class="Fheader">Your created Tournaments</h2>
 
             @foreach (var T in ViewBag.CreatedTournaments)
             {
@@ -24,29 +25,31 @@
             }
         }
 
-    if (ViewBag.joinedTournaments.Count != 0)
-    {
-        <p>Your joined tournaments</p>
-        @foreach (var f in ViewBag.joinedTournaments)
+        @if (ViewBag.joinedTournaments.Count != 0)
         {
-            <a class="flex-inner" href="#" style="text-decoration:none">
-                <div class="side1">
-                    @if (f.TournamentImage != null)
-                    {
-                        <img src="/images/tournaments/@f.TournamentImage">
-                    }
-                </div>
-                <div class="side2">
-                    <h2>@f.TournamentName</h2>
-                    <p>@f.TimeFrame</p>
-                </div>
-            </a>
+            <h2 style="margin-left:1%;"class="Fheader">Your Joined Tournaments</h2>
+            @foreach (var f in ViewBag.joinedTournaments)
+            {
+                <a class="flex-inner" href="#" style="text-decoration:none">
+
+                    <div class="side1">
+                        @if (f.TournamentImage != null)
+                        {
+                            <img src="/images/tournaments/@f.TournamentImage">
+                        }
+                    </div>
+                    <div class="side2">
+                        <h2>@f.TournamentName</h2>
+                        <p>@f.TimeFrame</p>
+                    </div>
+                </a>
             }
         }
-    else
-    {
-        <p> No active tournaments</p>
-    }
+        else
+        {
+            <p> No active tournaments</p>
+        }
+    </div>
 }
 
 
@@ -54,6 +57,29 @@
 
 
 <style>
+
+    .FormbuttonT {
+        text-decoration: none;
+        font-size: 15px;
+        padding: 5px;
+        width: 10%;
+        background-color: whitesmoke;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .containerS {
+        margin-left: 1%;
+        margin-top: 5%;
+        width: 100%;
+        background-color: #1f1f1f;
+        border-radius: 10px;
+    }
+
+        .containerS > a {
+            color: #43B581
+        }
     .flex-inner {
         width: 100%;
         height: 20vh;
@@ -61,6 +87,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         box-sizing: border-box;
+       
     }
 
         .flex-inner > h1, h2 {
@@ -96,9 +123,5 @@
             .flex-inner > .side2 > p {
                 font-size: 1em;
             }
-
-
-
-
 </style>
 

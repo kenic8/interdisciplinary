@@ -112,15 +112,19 @@ namespace TournamentWeb.Controllers
         }
         private async Task ProcessUploadImgFile(UserProfileViewModel model)
         {
-            DateTime now = DateTime.Now;
-            string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
-            string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":", "t");
-            string folderProj = "/images/profile/";
-            string UniqueName = Timetrimmed + model.ProfileImageFile.FileName.ToString();
-            folderProj += UniqueName;
-            string serverFolder = _webHostEnviroment.WebRootPath + folderProj;
-            await model.ProfileImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-            model.ProfileImage = UniqueName;
+            if (model.ProfileImageFile != null)
+            {
+                DateTime now = DateTime.Now;
+                string time = now.ToString("dd MMMM yyyy hh:mm:ss tt");
+                string Timetrimmed = String.Concat(time.Where(c => !Char.IsWhiteSpace(c))).Replace(":", "t");
+                string folderProj = "/images/profile/";
+                string UniqueName = Timetrimmed + model.ProfileImageFile.FileName.ToString();
+                folderProj += UniqueName;
+                string serverFolder = _webHostEnviroment.WebRootPath + folderProj;
+                await model.ProfileImageFile.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                model.ProfileImage = UniqueName;
+            }
+            
         }
 
         private Task<AppUser> CurrentUser =>

@@ -13,14 +13,14 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\marti\Documents\Github\Group project\interdisciplinary\TournamentWeb\Views\_ViewImports.cshtml"
+#line 1 "C:\Users\lille\Desktop\skole repo\interdisciplinary\TournamentWeb\Views\_ViewImports.cshtml"
 using TournamentWeb;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\marti\Documents\Github\Group project\interdisciplinary\TournamentWeb\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\lille\Desktop\skole repo\interdisciplinary\TournamentWeb\Views\_ViewImports.cshtml"
 using TournamentWeb.Models;
 
 #line default
@@ -66,7 +66,7 @@ using TournamentWeb.Models;
         {
             WriteLiteral("\r\n<!DOCTYPE html>\r\n");
 #nullable restore
-#line 3 "C:\Users\marti\Documents\Github\Group project\interdisciplinary\TournamentWeb\Views\Landing\Landingpage.cshtml"
+#line 3 "C:\Users\lille\Desktop\skole repo\interdisciplinary\TournamentWeb\Views\Landing\Landingpage.cshtml"
   
     ViewData["Title"] = "Landingpage";
 
@@ -177,7 +177,7 @@ using TournamentWeb.Models;
             }
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
-            WriteLiteral("\n");
+            WriteLiteral("\r\n");
 #nullable restore
 #line 41 "C:\Users\lille\Desktop\skole repo\interdisciplinary\TournamentWeb\Views\Landing\Landingpage.cshtml"
 }

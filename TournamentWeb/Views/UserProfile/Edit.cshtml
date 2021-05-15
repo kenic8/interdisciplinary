@@ -2,35 +2,32 @@
 @using TournamentWeb.Models.ViewModels
 @addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<div class="bg-primary m-1 p-1"><h4>Edit Profile</h4></div>
+
 <div asp-validation-summary="All" class="text-danger"></div>
-<form asp-action="Edit" enctype="multipart/form-data" method="post">
-    <div class="form-group">
+<form class="formouter" asp-action="Edit" enctype="multipart/form-data" method="post">
+    <h4 class="Fheader">Edit Profile</h4>
+    <div>
         <label hidden asp-for="Id"></label>
         <label hidden asp-for="ProfileImage"></label>
     </div>
-    <div class="form-group">
+    <div class="form">
         <label asp-for="UserName"></label>
-        <input asp-for="UserName" class="form-control" />
+        <input asp-for="UserName"  />
     </div>
-    <div class="form-group">
+    <div class="form">
         <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
+        <input asp-for="Email"  />
     </div>
-    @*<div class="form-group">
-        <label asp-for="Password">Password</label>
-        <input name="password" class="form-control" />
-    </div>*@
-    <div class="form-group">
+    <div class="form">
         <label asp-for="UserDiscord"></label>
-        <input asp-for="UserDiscord" class="form-control" />
+        <input asp-for="UserDiscord"  />
     </div>
-    <div class="form-group">
-        <label asp-for="ProfileImageFile" class="form-label">Add new Profile Picture</label>
-        <input asp-for="ProfileImageFile" class="form-control" type="file">
+    <div class="form">
+        <label asp-for="ProfileImageFile" >Add new Profile Picture</label>
+        <input asp-for="ProfileImageFile"  class="formtime" type="file">
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit"  class="Formbutton">Save</button>
     <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>

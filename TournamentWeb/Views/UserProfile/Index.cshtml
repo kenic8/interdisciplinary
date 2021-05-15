@@ -1,54 +1,51 @@
 ﻿@model TournamentWeb.Models.ViewModels.UserProfileViewModel
-<style>
-    img {
-        height: 200px;
-        width: auto;
-    }
 
-    #profile {
-        text-align: center;
-    }
-</style>
-
-<button onclick="hidehow()">Show Tournaments</button>
+<button class="FormbuttonT" onclick="hidehow()">Show Tournaments</button>
 <div class="flex-View">
     <div class="side" id="side">
         @await Component.InvokeAsync("UserTournaments")
     </div>
     <div class="main">
 
-        <div id="profile" class=" m-1 p-1">
-            <h1> THis is the profile page!</h1>
-            @if (Model.ProfileImage == null)
-            {
-                <img src="~/images/profile/default-user-icon.jpg" /><br />
-            }
-            else
-            {
-                <img src="~/images/profile/@Model.ProfileImage" alt="Alternate Text" /><br />
-            }
+        <div id="profile" class=" Fheader">
+            <h1> Hej! @Model.UserName</h1>
+            <div class="profileflex">
+                <div class="info1">
+                    @if (Model.ProfileImage == null)
+                    {
+                        <img class="pImage" src="~/images/profile/default-user-icon.jpg" /><br />
+                    }
+                    else
+                    {
+                        <img class="pImage" src="~/images/profile/@Model.ProfileImage" alt="Alternate Text" /><br />
+                    }
 
-            username
-            <h4>@Model.UserName</h4>
+                    <a asp-controller="UserProfile" asp-action="Edit" class="FormbuttonP">Edit Profile</a> <br />
 
-            points
-            <h4> @Model.Points</h4>
-            discord
-            <h4> @Model.UserDiscord </h4>
-            email
-            <h4>@Model.Email</h4>
-            <a asp-controller="UserProfile" asp-action="Edit" class="btn btn-primary">Edit Profile</a> <br />
+                    <form asp-action="Delete">
+                        <input type="hidden" name="Id"
+                               value="@Model.Id" />
+                        <input type="hidden" name="returnUrl"
+                               value="@Model.ReturnUrl" />
+                        <button type="submit" class="FormbuttonPDelete"
+                                onclick="return confirm('Are you sure you want to delete your account?')">
+                            Delete
+                        </button>
+                    </form>
+                </div>
 
-            <form asp-action="Delete">
-                <input type="hidden" name="Id"
-                       value="@Model.Id" />
-                <input type="hidden" name="returnUrl"
-                       value="@Model.ReturnUrl" />
-                <button type="submit" class="btn m-1 btn-danger"
-                        onclick="return confirm('Are you sure you want to delete your account?')">
-                    Delete
-                </button>
-            </form>
+                <div class="info2">
+                    <h3>Discord</h3>
+                    <p> @Model.UserDiscord </p>
+                    <h3>Email</h3>
+                    <p>@Model.Email</p>
+                    <h3>Username</h3>
+                    <p>@Model.UserName</p>
+                    <h3>Points</h3>
+                    <p> @Model.Points</p>
+
+                </div>
+            </div>
         </div>
     </div>
 
@@ -71,7 +68,7 @@
 
     <style>
         button:hover {
-            color: orange;
+            background-color: #43B581;
         }
 
         .flex-View {
@@ -88,9 +85,10 @@
             }
 
             .flex-View > .main {
-                background-color: red;
+                background-color: #22282a;
                 flex-grow: 1;
                 height: auto;
+                color: whitesmoke;
             }
 
         #profile {

@@ -1,7 +1,6 @@
 ﻿
 @model Tournament
 @using Microsoft.AspNetCore.Identity;
-<div class="bg-primary m-1 p-1 text-white"><h4>Create Tournament</h4></div>
 <div asp-validation-summary=" All" class="text-danger"></div>
 
 
@@ -11,42 +10,42 @@
 
 
 
-<form asp-action="AddTournament" asp-controller="Addtournament" method="post" enctype="multipart/form-data">
-
-    <div class="form-group">
+<form class="formouter" asp-action="AddTournament" asp-controller="Addtournament" method="post" enctype="multipart/form-data">
+    <h2 class="Fheader">Create Tournament</h2>
+    <div class="form">
         <label asp-for="TimeFrame"> Start Time</label>
-        <input asp-for="TimeFrame" class="form-control" />
+        <input class="formtime" asp-for="TimeFrame" />
         @*<span asp-validation-for="TimeFrame"></span>*@
     </div>
-    <div class="form-group">
+    <div class="form">
         <label asp-for="TournamentName"></label>
-        <input asp-for="TournamentName" class="form-control" />
+        <input asp-for="TournamentName" />
         @*<span asp-validation-for="TournamentName"></span>*@
     </div>
 
-    <div class="form-group">
+    <div class="form">
         <label asp-for="TournamentInfo"></label>
-        <textarea asp-for="TournamentInfo" class="form-control"></textarea>
+        <textarea asp-for="TournamentInfo"></textarea>
         @*<span asp-validation-for="TournamentInfo"></span>*@
     </div>
 
-    <div class="form-group">
+    <div class="form">
         <label asp-for="Bracketsize"></label>
-        <input type="number" asp-for="Bracketsize" class="form-control">
+        <input class="formtime" type="number" asp-for="Bracketsize">
         @*<span asp-validation-for="Bracketsize"></span>*@
     </div>
 
-    <div class="form-group">
-        <label asp-for="TournamentImageFile" class="form-label">Default file input example</label>
-        <input asp-for="TournamentImageFile"class ="form-control" type="file">
+    <div class="form">
+        <label asp-for="TournamentImageFile">Default file input example</label>
+        <input class="formtime" asp-for="TournamentImageFile" type="file">
     </div>
 
-    <div class="form-group">
-        <input type="hidden" asp-for="UserId" value="@UserManager.GetUserId(User)" class="form-control" />
+    <div class="form">
+        <input type="hidden" asp-for="UserId" value="@UserManager.GetUserId(User)" />
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="Formbutton">Create!</button>
     <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
 
