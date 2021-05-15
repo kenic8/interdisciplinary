@@ -1,61 +1,106 @@
 ﻿
 
-
 @{
     ViewData["Title"] = "LoggedInLanding";
 }
 
-<h1>LoggedInLanding</h1>
+
 
 @*Look at the controller du find the redirect action method named accordingly*@
-<a class="nav-link text-dark" asp-area="" asp-controller="Addtournament" asp-action="AddTournament"> Create Tournament</a>
-<a class="nav-link text-dark" asp-area="" asp-controller="UserProfile" asp-action="Index"> Profile</a>
-
-@*<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Create Tournament</a>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Profile</a>*@
+<a class="nav-link text-white" asp-area="" asp-controller="Addtournament" asp-action="AddTournament"> Create Tournament</a>
+<a class="nav-link text-white" asp-area="" asp-controller="UserProfile" asp-action="Index"> Profile</a>
 
 
+<div class="container">
+    <h2> Newest Torunaments</h2>
+    <ul class="cards">
+
+        @foreach (var T in ViewBag.NewT)
+
+        {
+            if (T.TournamentImage != null)
+            {
+                <li class="cards_item">
+                    <div class="card">
+                        <div class="card_image"><img style="height:100px; width:100%;" src="/images/tournaments/@T.TournamentImage"></div>
+                        <div class="card_content">
+                            <h2 style="text-align:center; margin-bottom:5%;" class="card_title">@T.TournamentName</h2>
+                            <div class="flex-container">
+                                <div id="flex1">
+                                    <img id="imgflex" src="https://static.thenounproject.com/png/925223-200.png" />
+                                    <div id="left">
+                                        <p>
+                                            @T.ParticipantsAmount Attendees
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-container">
+                                <div id="flex2">
+                                    <img id="imgflex" src="/images/dateicon.png" />
+                                    <div id="left2" style="font-size:1em;"><p><b>Kickoff</b>  @T.TimeFrame</div>
+                                </div>
+                            </div>
+                            <button onclick="document.location='/Tournaments/Details/@T.TournamentId'" class="btn"> Read More</button>
+                        </div>
+                    </div>
+                </li>
+
+            }
 
 
-<div class="slider" ondrag="slide(event, this)" onmouseenter="slide(event, this)" ontouchmove="slide(event,this)">
-    <div class="slider-inner" id="sliderinner">
-        <a href="#">
-            <div class="slide-img">
-                <p class="img-text">blabla</p>
-                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
-            </div>
-        </a>
+        }
+    </ul>
 
-        <a href="#">
-            <div class="slide-img">
-                <p class="img-text">blabla</p>
-                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
-            </div>
-        </a>
+    <h2 style="margin-top:10%;"> Ongoing tournaments</h2>
+    <ul class="cards">
 
-        <a href="#">
-            <div class="slide-img">
-                <p class="img-text">blabla</p>
-                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
-            </div>
-        </a>
+        @foreach (var T in ViewBag.NewF)
 
-        <a href="#">
-            <div class="slide-img">
-                <p class="img-text">blabla</p>
-                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
-            </div>
-        </a>
+        {
+            if (T.TournamentImage != null)
+            {
+                <li class="cards_item">
+                    <div class="card">
+                        <div class="card_image"><img style="height:100px; width:100%;" src="/images/tournaments/@T.TournamentImage"></div>
+                        <div class="card_content">
+                            <h2 style="text-align:center; margin-bottom:5%;" class="card_title">@T.TournamentName</h2>
+                            <div class="flex-container">
+                                <div id="flex1">
+                                    <img id="imgflex" src="https://static.thenounproject.com/png/925223-200.png" />
+                                    <div id="left">
+                                        <p>
+                                            @T.ParticipantsAmount Attendees
+                                        </p>
 
-        <a href="#">
-            <div class="slide-img">
-                <p class="img-text">blabla</p>
-                <img id="Gallery-Img" src="/images/profile/default-user-icon.jpg" alt="Alternate Text" />
-            </div>
-        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-container">
+                                <div id="flex2">
+                                    <img id="imgflex" src="/images/dateicon.png" />
+                                    <div id="left2" style="font-size:1em;"><p><b>Kickoff</b>  @T.TimeFrame</div>
+                                </div>
+                            </div>
+                            <button onclick="document.location='/Tournaments/Details/@T.TournamentId'" class="btn"> Read More</button>
+                        </div>
+                    </div>
+                </li>
 
-    </div>
+            }
+
+
+        }
+    </ul>
+
 </div>
+
+
+
+
+
+
 
 
 
@@ -68,83 +113,222 @@
 
 
 
-
 <style>
-  /*  .flex-container {
+
+    container {
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    p {
+        color: lightgray;
+        font-size: 16px;
+        line-height: 1.428571429;
+        margin: 0;
+    }
+
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+        text-align: left;
+    }
+
+
+    h2 {
+        margin-left: 5%;
+        font-size: 4em;
+        text-align: left;
+        color: #43b581;
+        font-weight: bold;
+    }
+
+
+
+    .btn {
+        margin-top: 15%;
+        color: #ffffff;
+        padding: 0.8rem;
+        font-size: 14px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        font-weight: 400;
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: transparent;
+    }
+
+        .btn:hover {
+            background-color: #43b581;
+        }
+
+    .cards {
+        width: 100%;
+        align-content: center;
         display: flex;
-        flex-wrap: nowrap;
-        background-color: DodgerBlue;
+        flex-wrap: wrap;
+        list-style: none;
+    }
+
+    .cards_item {
+        display: flex;
+        padding: 1rem;
+        width: 25%;
+        max-width: 350px;
+    }
+
+
+    .card {
+        border-radius: 0.25rem;
+        box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: #3d4351;
+        height: 360px;
+    }
+
+    .card_content {
+        padding: 1rem;
+        background: #3d4351;
+        font-size: 0.7em;
+    }
+
+    .card_title {
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+
+    .card_text {
+        color: whitesmoke;
+        font-size: 0.875rem;
+        line-height: 1;
+        font-weight: 400;
+    }
+
+    .flex-container {
+        margin-top: 5%;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    #imgflex {
+        width: 10%;
+    }
+
+
+    #left2 {
+        font-size: 0.5em;
+        margin: 0;
+    }
+
+
+    #flex1 {
         width: 100%;
     }
 
-        .flex-container > div {
-            background-color: #f1f1f1;
-            width: 100px;
-            margin: 10px;
-            text-align: center;
-            line-height: 75px;
-            font-size: 30px;
-        }*/
-
-    /*#Gallery-Img {
-    width: 100%;
-    height: 100%;
-}
-
-
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    height: auto;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-
-
-    div {
-        width: 45%;
-        height: auto;
-        text-align: center;
-        font-size: 1.5em;
-        padding-bottom: 5vh;
-        align-items: center;
-
-
-        .img-text {
-            color:yellow;
-            position: relative;
-            z-index: 99999;
-            transform: translateY(-10%)
-        }
+    #flex2 {
+        width: 100%;
     }
-}
+</style>
 
 
 
-.flex-container-list {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    height: auto;
 
 
-    div {
-        width: 20%;
-        height: auto;
-        text-align: center;
-        font-size: 1.5em;
-        padding-bottom: 5vh;
-        align-items: center;
+@*<h1> Ongoing Tournaments</h1>
+
+    <div class="slider" ondrag="slide(event, this)" onmouseenter="slide(event, this)" ontouchmove="slide(event,this)">
+        <div class="slider-inner" id="sliderinner">
 
 
-        .img-text {
-            color: yellow;
-            position: relative;
-            z-index: 99999;
-            transform: translateY(-10%)
+            @foreach (var F in ViewBag.NewF)
+            {
+                if (F.TournamentImage != null)
+                {
+                    <a id="classlink" href="/Tournaments/Details/@F.TournamentId">
+                        <div class="slide-img">
+                            <p class="img-text"> @F.TournamentName</p>
+                            <img id="Gallery-Img" src="/images/tournaments/@F.TournamentImage" alt="Alternate Text" />
+                        </div>
+                    </a>
+                }
+            }
+
+
+
+        </div>
+    </div>*@
+
+
+
+
+
+@*<script defer>
+    slider try scripts
+        function slide(e, drag) {
+            this.drag = drag;
+            this.draginner = drag.children[0];
+            this.pressed = false;
+            this.startx;
+            this.x;
+            this.drag.addEventListener('mousedown', (e) => {
+                this.pressed = true;
+                this.startx = e.offsetX - this.draginner.offsetLeft;
+                this.drag.style.cursor = 'grabbing';
+
+            });
+
+            this.drag.addEventListener('click', (e) => {
+                this.pressed = false;
+                this.document.getElementById("sliderinner").style.pointerEvents = "all";
+            });
+
+
+            this.drag.addEventListener('mouseup', () => {
+                this.drag.style.cursor = 'grab';
+                this.pressed = false;
+            });
+
+            this.drag.addEventListener('mousemove', (e) => {
+                if (!this.pressed) {
+                    document.getElementById("sliderinner").style.pointerEvents = "none";
+                    return;
+
+                }
+                document.getElementById("Gallery-Img").style.pointerEvents = "all";
+                e.preventDefault();
+                x = e.offsetX;
+                this.draginner.style.left = `${x - this.startx}px `;
+                overflowcheck();
+            });
+
+
+            function overflowcheck() {
+                outer = this.drag.getBoundingClientRect();
+                inner = this.draginner.getBoundingClientRect();
+                if (parseInt(this.draginner.style.left) > 0) {
+                    this.draginner.style.left = '0px'
+                } else if (inner.right < outer.right) {
+                    this.draginner.style.left = `-${inner.width - outer.width}px`
+                }
+            }
         }
+    </script>*@
+
+@*slider try styling*@
+@*/*  #Gallery-Img {
+        width: 300px;
+        height: 250px;
+        border: none;
     }
-}*/
+
 
 
     .slider {
@@ -156,10 +340,12 @@
         overflow: hidden;
     }
 
-    h1{
-        margin-top:10%;
+    h1 {
+        margin-top: 10%;
     }
+
     .slider-inner {
+        pointer-events: all;
         position: relative;
         top: 0;
         left: 0;
@@ -172,79 +358,14 @@
         transition: 0s ease-in;
     }
 
-        .slider-inner > .slide-img {
-            width: 100%;
-            height: 200px;
-        }
-
-            .slider-inner > .slide-img > .img-text {
-                color: yellow;
-                position: relative;
-                z-index: 99999;
-                transform: translate3d(30%,20vh,0)
-            }
-  
-
-</style>
-
-
-
-<script defer>
-    function slide(e, drag) {
-        this.drag = drag;
-        this.draginner = drag.children[0];
-        this.pressed = false;
-        this.startx;
-        this.x;
-        this.drag.addEventListener('mousedown', (e) => {
-            this.pressed = true;
-            this.startx = e.offsetX - this.draginner.offsetLeft;
-            this.drag.style.cursor = 'grabbing';
-        });
-
-        this.drag.addEventListener('mouseup', () => {
-            this.drag.style.cursor = 'grab';
-        });
-        this.drag.addEventListener('mouseup', () => {
-            this.pressed = false;
-        });
-        this.drag.addEventListener('mousemove', (e) => {
-            if (!this.pressed) return;
-            e.preventDefault();
-            x = e.offsetX;
-            this.draginner.style.left = `${x - this.startx}px `;
-            overflowcheck();
-        });
-
-        ///mobile  clientX
-
-        var clientX
-
-        this.drag.addEventListener('touchstart', (e) => {
-            this.pressed = true;
-            clientX = e.touches[0].clientX;
-            this.startx = clientX - this.draginner.offsetLeft;
-        });
-        this.drag.addEventListener('touchend', () => {
-            this.pressed = false;
-        });
-        this.drag.addEventListener('touchmove', (e) => {
-            if (!e) return;
-            e.preventDefault();
-            clientX = e.touches[0].clientX;
-            this.draginner.style.left = `${clientX - this.startx}px `;
-            overflowcheck();
-        });
-        function overflowcheck() {
-            outer = this.drag.getBoundingClientRect();
-            inner = this.draginner.getBoundingClientRect();
-            if (parseInt(this.draginner.style.left) > 0) {
-                this.draginner.style.left = '0px'
-            } else if (inner.right < outer.right) {
-                this.draginner.style.left = `-${inner.width - outer.width}px`
-            }
-        }
+    #Simg {
+        width: 200px;
+        height: 200px;
     }
-</script>
 
-
+    .slider-inner > .slide-img > .img-text {
+        color: yellow;
+        position: relative;
+        z-index: 99999;
+        transform: translate3d(30%,20vh,0)
+    }*/*@

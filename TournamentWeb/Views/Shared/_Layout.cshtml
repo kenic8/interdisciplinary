@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/css/layout.css" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
     <header>
@@ -41,17 +43,45 @@
             }
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TournamentWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <div class="main">
+        @RenderBody()
+
+    </div>
+   <footer>
+    <section id="footertext">
+
+        <div class="footerboks">
+            <div><h3>Explore</h3></div>
+            <div><a>Create</a></div>
+            <div><a>Tournaments</a></div>
+            <div><a>About us</a></div>
+            <div><a>Log in</a></div>
+            <div><a>Sign up</a></div>
         </div>
+
+        <div class="footerboks">
+            <div><h3>About</h3></div>
+            <div> &copy; 2021 - TournamentWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></div>
+            <div><a>Terms</a></div>
+            <div><a>API</a></div>
+        </div>
+
+        <div class="footerboks">
+            <div><h3>Social</h3></div>
+            <img src="images/discord-16.png">
+            <img src="images/discord-16.png">
+        </div>
+    </section>
     </footer>
+
+
+
+
+
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -82,5 +112,10 @@
 </html>
 
 <style>
-
+    .main {
+        background-color: #22282a;
+    }
+    .body {
+        background-color: #22282a;
+    }
 </style>
