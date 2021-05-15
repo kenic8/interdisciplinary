@@ -1,0 +1,189 @@
+﻿@model TournamentWeb.Models.Tournament
+@{
+    string bracketLindk = "http://" + "localhost:44881/Bracket/Index/" + Model.TournamentId + "?wmode=transparent";
+}
+
+<iframe src="@bracketLindk"></iframe>
+
+@* List of players partial-view and AddPlayers partial-view *@
+@await Html.PartialAsync("_TournamentParticipants")
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    if ($('#errorLoader').length) {
+        $("#errorLoader").ready(function () {
+            testfuck(0, 0, 0, "@ViewBag.error");
+        })
+    }
+
+</script>
+
+
+<style>
+    iframe {
+        width: 100%;
+        height: 500px;
+    }
+
+    #Tcontainer {
+        background: grey;
+        height: 40vh;
+        width: 100%;
+    }
+
+
+    .Pcontainer {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .teamwrap {
+        width: 200px;
+        border: 1px solid lightblue;
+        height: max-content;
+        margin: 12px;
+    }
+
+    .AttendeeName:nth-child(even) {
+        background: #add8e642;
+    }
+
+    .teamName {
+        color: white;
+        background: lightblue;
+        padding: 8px;
+    }
+
+        .teamName p {
+            margin: 0 0 8px 0;
+        }
+
+    .AttendeeName {
+        color: grey;
+        display: flex;
+        justify-content: space-between
+    }
+
+        .AttendeeName p {
+            margin: 0 0 0 4px;
+        }
+    #Tcontainer {
+        height: 90vh;
+        width: 90vw;
+        background: rgb(164, 236, 218);
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        top: 50%
+    }
+
+    #BracketContainer {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        bottom: 35%
+    }
+
+    .player {
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        background: rgb(0, 0, 0);
+        height: 40px;
+        width: 82px;
+        position: absolute;
+        bottom: 20px;
+    }
+
+        .player:hover {
+            cursor: pointer;
+        }
+
+        .player p {
+            position: absolute;
+            transform: translate(-50%, -0%);
+            left: 50%;
+            margin: 0;
+            top: 100%;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+    .hline {
+        width: 4px;
+        transform: translate(-50%, -100%);
+        position: relative;
+        left: 50%;
+        top: 50%;
+        background: rgb(0, 0, 0);
+    }
+
+    .wlineR {
+        height: 4px;
+        position: relative;
+        background: rgb(0, 0, 0);
+    }
+
+    .wlineL {
+        height: 4px;
+        transform: translateX(-100%);
+        position: relative;
+        background: rgb(0, 0, 0);
+    }
+
+
+    .ActiveP {
+        pointer-events: initial;
+        background: #3186f5 !important;
+    }
+
+        .ActiveP div {
+            background: #3186f5 !important;
+        }
+
+    .Winteam div {
+        background: #00fb3f !important;
+    }
+
+    .Winteam {
+        background: #00fb3f !important;
+    }
+
+    .teamNameText {
+        top: 10px !important;
+        background: white;
+        pointer-events: none;
+    }
+
+    .Out {
+        opacity: 0.4;
+        pointer-events: none;
+        background: black !important;
+    }
+
+        .Out div {
+            opacity: 0.5;
+            pointer-events: none;
+            background: black !important;
+        }
+
+    .Won {
+        background: #09ff00 !important;
+        opacity: 0.7;
+    }
+
+        .Won div {
+            background: #09ff00 !important;
+            opacity: 0.7;
+        }
+
+    .Winner {
+        background: yellow !important;
+    }
+
+        .Winner div {
+            background: yellow !important;
+        }
+</style>

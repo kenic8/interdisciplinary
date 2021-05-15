@@ -1,12 +1,11 @@
-﻿@model TournamentWeb.Models.Tournament
-@inject SignInManager<AppUser> SignInManager
+﻿@inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 @using Microsoft.AspNetCore.Identity;
 
-
-@{ 
+@model TournamentWeb.Models.Tournament
+@*@{
     string bracketLindk = "http://" + "localhost:44881/Bracket/Index/" + Model.TournamentId + "?wmode=transparent";
-}
+}*@
 
 <div id="myTag"></div>
 
@@ -14,86 +13,37 @@
     @Model.TournamentName
 </h1>
 
-@{
-    if (ViewBag.error != null)
+<button class="tablink" onclick="openPage('Overview', this )" id="defaultOpen">Overview</button>
+<button class="tablink" onclick="openPage('Brackets', this)" >Brackets</button>
+
+<br/>
+<div id="Overview" class="tabcontent">
+ 
+    @await Html.PartialAsync("_TournamentOverview")
+</div>
+
+<div id="Brackets" class="tabcontent">
+
+    @* Brackets, List of players partial-view and AddPlayers partial-view *@
+    @await Html.PartialAsync("_TournamentBrackets")
+</div>
+
+   @if (ViewBag.error != null)
     {
         <div id="errorLoader"></div>
-    };
-}
-
-<iframe src="@bracketLindk"></iframe>
+    }
 
 
+@*<iframe src="@bracketLindk"></iframe>*@
 
 @*<div id="Tcontainer" data-torunamentID="@Model.TournamentId">
-    <div id="BracketContainer">
+        <div id="BracketContainer">
 
-    </div>
-</div>*@
-
-<div class="bg-primary m-1 p-1 text-white">
-    Participants
-</div>
-
-
-<div class="Pcontainer">
-    @foreach (var team in Model.Teams)
-    {
-        <div class="teamwrap">
-            <div class="teamName">
-                <p>@Html.DisplayFor(modelItem => team.TeamName)</p>
-                @foreach (var Attendee in team.Attendees)
-                {
-                    @if (UserManager.GetUserId(User) == Attendee.UserID && Attendee.UserStatus == "TeamLeader")
-                    {
-                        <a asp-action="Delete" asp-route-id="@Model.TournamentId" asp-route-TeamId="@team.TeamId">
-                            <div class="btn btn-outline-danger btn-sm">Delete</div>
-                        </a>
-                    }
-                }
-
-            </div>
-            @foreach (var Attendee in team.Attendees)
-            {
-                <div class="AttendeeName">
-                    <p>
-                        @Html.DisplayFor(modelItem => Attendee.UserName)
-                        @if (Attendee.UserStatus == "TeamLeader")
-                        {
-                            <span>(TL)</span>
-                        }
-
-                    </p>
-                    @if (UserManager.GetUserId(User) == Attendee.UserID)
-                    {
-                        <a asp-action="RemovePlayer" asp-route-id="@Model.TournamentId" asp-route-TeamId="@team.TeamId">
-                            <div class="btn btn-outline-danger btn-sm">Leave</div>
-                        </a>
-                    }
-                    //WRONG
-                    else
-                    {
-                        @foreach (var AttendeeN in team.Attendees)
-                        {
-                            if (AttendeeN.UserStatus == "TeamLeader" && UserManager.GetUserId(User) == AttendeeN.UserID)
-                            {
-                                <a id="dadatest" asp-action="RemovePlayer" asp-route-id="@Model.TournamentId" asp-route-TeamId="@team.TeamId" asp-route-UserID="@Attendee.UserID">
-                                    <div class="btn btn-outline-danger btn-sm">Remove</div>
-                                </a>
-                            }
-                        }
-                    }
-                </div>
-            }
-            @for (int i = 0; i < 3 - team.Attendees.Count; i++)
-            {
-                <div class="AttendeeName">
-                    <div id="UseShipAddr" onclick="testfuck(@Model.TournamentId, @team.TeamId, 0, 'AddPlayer')" class="btn btn-outline-primary btn-sm">Add</div>
-                </div>
-            }
         </div>
-    }
-</div>
+    </div>*@
+
+
+
 
 
 <button class="btn btn-primary" onclick="testfuck(@Model.TournamentId, 0, 0, 'CreateTeam')">
@@ -101,197 +51,228 @@
 </button>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    if ($('#errorLoader').length) {
-        $("#errorLoader").ready(function () {
-            testfuck(0, 0, 0, "@ViewBag.error");
-        })
-    }
-
-</script>
-
-
 <style>
-    iframe {
-        width: 100%;
-        height: 500px;
-    }
-    #Tcontainer {
-        background: grey;
-        height: 40vh;
-        width: 100%;
-    }
-
-
-    .Pcontainer {
-        height: auto;
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .teamwrap {
-        width: 200px;
-        border: 1px solid lightblue;
-        height: max-content;
-        margin: 12px;
-    }
-
-    .AttendeeName:nth-child(even) {
-        background: #add8e642;
-    }
-
-    .teamName {
+    /* Style tab links */
+    .tablink {
+        background-color: #555;
         color: white;
-        background: lightblue;
-        padding: 8px;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 7px 8px;
+        font-size: 17px;
+        width: 25%;
+    }
+    .tablink:hover {
+        background-color: #777;
+    }
+    /* Hiding tabcontent  */
+    .tabcontent {
+        display: none;
     }
 
-        .teamName p {
-            margin: 0 0 8px 0;
+</style>
+<script>
+    function openPage(pageName, elmnt, color) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
 
-    .AttendeeName {
-        color: grey;
-        display: flex;
-        justify-content: space-between
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
+
     }
 
-        .AttendeeName p {
-            margin: 0 0 0 4px;
+// Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        if ($('#errorLoader').length) {
+            $("#errorLoader").ready(function () {
+                testfuck(0, 0, 0, "@ViewBag.error");
+            })
+        }
+
+    </script>
+
+
+    <style>
+        iframe {
+            width: 100%;
+            height: 500px;
+        }
+
+        #Tcontainer {
+            background: grey;
+            height: 40vh;
+            width: 100%;
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #Tcontainer {
-        height: 90vh;
-        width: 90vw;
-        background: rgb(164, 236, 218);
-        transform: translate(-50%, -50%);
-        position: absolute;
-        left: 50%;
-        top: 50%
-    }
-
-    #BracketContainer {
-        transform: translate(-50%, -50%);
-        position: absolute;
-        left: 50%;
-        bottom: 35%
-    }
-
-    .player {
-        pointer-events: none;
-        transform: translate(-50%, -50%);
-        background: rgb(0, 0, 0);
-        height: 40px;
-        width: 82px;
-        position: absolute;
-        bottom: 20px;
-    }
-
-        .player:hover {
-            cursor: pointer;
+        .Pcontainer {
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
         }
 
-        .player p {
+        .teamwrap {
+            width: 200px;
+            border: 1px solid lightblue;
+            height: max-content;
+            margin: 12px;
+        }
+
+        .AttendeeName:nth-child(even) {
+            background: #add8e642;
+        }
+
+        .teamName {
+            color: white;
+            background: lightblue;
+            padding: 8px;
+        }
+
+            .teamName p {
+                margin: 0 0 8px 0;
+            }
+
+        .AttendeeName {
+            color: grey;
+            display: flex;
+            justify-content: space-between
+        }
+
+            .AttendeeName p {
+                margin: 0 0 0 4px;
+            }
+
+
+        #Tcontainer {
+            height: 90vh;
+            width: 90vw;
+            background: rgb(164, 236, 218);
+            transform: translate(-50%, -50%);
             position: absolute;
-            transform: translate(-50%, -0%);
             left: 50%;
-            margin: 0;
-            top: 100%;
-            font-weight: bold;
-            font-size: 20px;
+            top: 50%
         }
 
-    .hline {
-        width: 4px;
-        transform: translate(-50%, -100%);
-        position: relative;
-        left: 50%;
-        top: 50%;
-        background: rgb(0, 0, 0);
-    }
+        #BracketContainer {
+            transform: translate(-50%, -50%);
+            position: absolute;
+            left: 50%;
+            bottom: 35%
+        }
 
-    .wlineR {
-        height: 4px;
-        position: relative;
-        background: rgb(0, 0, 0);
-    }
+        .player {
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            background: rgb(0, 0, 0);
+            height: 40px;
+            width: 82px;
+            position: absolute;
+            bottom: 20px;
+        }
 
-    .wlineL {
-        height: 4px;
-        transform: translateX(-100%);
-        position: relative;
-        background: rgb(0, 0, 0);
-    }
+            .player:hover {
+                cursor: pointer;
+            }
+
+            .player p {
+                position: absolute;
+                transform: translate(-50%, -0%);
+                left: 50%;
+                margin: 0;
+                top: 100%;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+        .hline {
+            width: 4px;
+            transform: translate(-50%, -100%);
+            position: relative;
+            left: 50%;
+            top: 50%;
+            background: rgb(0, 0, 0);
+        }
+
+        .wlineR {
+            height: 4px;
+            position: relative;
+            background: rgb(0, 0, 0);
+        }
+
+        .wlineL {
+            height: 4px;
+            transform: translateX(-100%);
+            position: relative;
+            background: rgb(0, 0, 0);
+        }
 
 
-    .ActiveP {
-        pointer-events: initial;
-        background: #3186f5 !important;
-    }
-
-        .ActiveP div {
+        .ActiveP {
+            pointer-events: initial;
             background: #3186f5 !important;
         }
 
-    .Winteam div {
-        background: #00fb3f !important;
-    }
+            .ActiveP div {
+                background: #3186f5 !important;
+            }
 
-    .Winteam {
-        background: #00fb3f !important;
-    }
+        .Winteam div {
+            background: #00fb3f !important;
+        }
 
-    .teamNameText {
-        top: 10px !important;
-        background: white;
-        pointer-events: none;
-    }
+        .Winteam {
+            background: #00fb3f !important;
+        }
 
-    .Out {
-        opacity: 0.4;
-        pointer-events: none;
-        background: black !important;
-    }
+        .teamNameText {
+            top: 10px !important;
+            background: white;
+            pointer-events: none;
+        }
 
-        .Out div {
-            opacity: 0.5;
+        .Out {
+            opacity: 0.4;
             pointer-events: none;
             background: black !important;
         }
 
-    .Won {
-        background: #09ff00 !important;
-        opacity: 0.7;
-    }
+            .Out div {
+                opacity: 0.5;
+                pointer-events: none;
+                background: black !important;
+            }
 
-        .Won div {
+        .Won {
             background: #09ff00 !important;
             opacity: 0.7;
         }
 
-    .Winner {
-        background: yellow !important;
-    }
+            .Won div {
+                background: #09ff00 !important;
+                opacity: 0.7;
+            }
 
-        .Winner div {
+        .Winner {
             background: yellow !important;
         }
-</style>
+
+            .Winner div {
+                background: yellow !important;
+            }
+    </style>*@

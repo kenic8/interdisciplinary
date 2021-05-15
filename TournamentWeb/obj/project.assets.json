@@ -7936,19 +7936,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lille\\.nuget\\packages\\": {}
+    "C:\\Users\\marti\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lille\\Desktop\\skole repo\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
+      "projectUniqueName": "C:\\Users\\marti\\Documents\\Github\\Group project\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
       "projectName": "TournamentWeb",
-      "projectPath": "C:\\Users\\lille\\Desktop\\skole repo\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
-      "packagesPath": "C:\\Users\\lille\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lille\\Desktop\\skole repo\\interdisciplinary\\TournamentWeb\\obj\\",
+      "projectPath": "C:\\Users\\marti\\Documents\\Github\\Group project\\interdisciplinary\\TournamentWeb\\TournamentWeb.csproj",
+      "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\marti\\Documents\\Github\\Group project\\interdisciplinary\\TournamentWeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lille\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
