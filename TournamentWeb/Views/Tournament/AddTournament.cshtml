@@ -4,18 +4,18 @@
 <div asp-validation-summary=" All" class="text-danger"></div>
 
 
-<form asp-action="AddTournament" asp-controller="Tournament" method="post">
+<form class="formouter" style="width:40%" asp-action="AddTournament" asp-controller="Tournament" method="post">
     
-    <div class="form-group">
+    <div>
         <label class="input" asp-for="TimeFrame"> Start Time</label>
         <input asp-for="TimeFrame" class="form-control" />
     </div>
-    <div class="form-group">
+    <div>
         <label  class="input" asp-for="TournamentName"></label>
         <input asp-for="TournamentName" class="form-control" />
     </div>
 
-    <div class="form-group">
+    <div >
         <label class="input"  asp-for="TournamentInfo"></label>
         <textarea asp-for="TournamentInfo" class="form-control"></textarea>
     </div>

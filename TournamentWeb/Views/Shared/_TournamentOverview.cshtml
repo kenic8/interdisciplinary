@@ -1,52 +1,51 @@
 ﻿@model TournamentWeb.Models.Tournament
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TournamentName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TournamentName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TournamentInfo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TournamentInfo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TimeFrame)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TimeFrame)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ParticipantsAmount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ParticipantsAmount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Bracketsize)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Bracketsize)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TournamentImage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TournamentImage)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.TournamentId">Edit</a> 
-</div>
+
+
+    <div class="flex-View">
+        <div class="side" id="side">
+
+            <button class="FormbuttonT" onclick="hidehow()">Show Tournaments</button>
+            @await Component.InvokeAsync("UserTournaments")
+
+        </div>
+        <div class="main">
+
+            <div class="profileflex" style="margin-top:5%; width:60%;">
+                <div class="info2 ">
+                    <div class="info1">
+                        <img class="pImage" src="~/images/Tournaments/@Model.TournamentImage" style="width:150%; " alt="Alternate Text" /><br />
+
+                    </div>
+                    <p> @Html.DisplayFor(model => model.TournamentName) </p>
+                    <h3>Creation Date </h3>
+                    <p> @Html.DisplayFor(model => model.CreationDate)</p>
+                    <h3>Kick OFF</h3>
+                    <p>  @Html.DisplayFor(model => model.TimeFrame)</p>
+
+                </div>
+
+                <div class="info2">
+
+                    <h3>Participants</h3>
+                        <p>@Html.DisplayFor(model => model.ParticipantsAmount)</p>
+                    <h3>Bracket Size </h3>
+                    <p>@Html.DisplayFor(model => model.Bracketsize)</p>
+                    <h3>Kick OFF</h3>
+                    <p>  @Html.DisplayFor(model => model.TimeFrame)</p>
+                    <h3>Tournament Info</h3>
+                    <p> @Html.DisplayFor(model => model.TournamentInfo)</p>
+                    @*<div>
+                            <a  class="orangebutton" style=" font-size: 22px; width: 20%;" asp-action="Edit" asp-route-id="@Model.TournamentId">Edit</a>
+                        </div>*@
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    

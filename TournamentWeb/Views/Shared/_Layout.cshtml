@@ -7,72 +7,90 @@
     <link rel="stylesheet" href="/css/layout.css" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Landing" asp-action="LandingPage">TournamentWeb</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tournaments" asp-action="Index">Tournaments</a>
+        <nav>
+            <div class="navting">
+                <a class="" asp-area="" asp-controller="Landing" asp-action="LandingPage">TournamentWeb</a>
+                <div class="nav-A">
+                    <ul class="nav-ul">
+                        <li class="nav-li">
+                            <a class="Link-nav" asp-area="" asp-controller="Tournaments" asp-action="Index">Tournaments</a>
                         </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Addtournament" asp-action="AddTournament"> Create Tournament</a>
+                        <li class="nav-li">
+                            <a class="Link-nav" asp-area="" asp-controller="Addtournament" asp-action="AddTournament"> Create Tournament</a>
                         </li>
                     </ul>
                 </div>
+                <div class="nav-buttons">
+                    @if (User?.Identity?.IsAuthenticated ?? false)
+                    {
+                        <a asp-controller="Account" asp-action="Logout"
+                          >Logout</a>
+                    }
+                    else
+                    {
+                        <button class="Blackbutton" onclick="testfuck(0, 0, 0, 'LogIn')">
+                            Login
+                        </button>
+                        <a asp-controller="Account" asp-action="Register">Register</a>
+                    }
+                </div>
             </div>
-            @if (User?.Identity?.IsAuthenticated ?? false)
-            {
-                <a asp-controller="Account" asp-action="Logout"
-                   class="btn btn-danger">Logout</a>
-            }
-            else
-            {
-                <a onclick="testfuck(0, 0, 0, 'LogIn')"
-                   class="btn btn-light">Login</a>
-                <a asp-controller="Account" asp-action="Register"
-                   class="btn btn-primary">Register</a>
-            }
         </nav>
     </header>
 
-    <div class="main">
-        @RenderBody()
 
+    @if (User?.Identity?.IsAuthenticated ?? false)
+    { }
+
+    <div class="flex-View">
+
+        @if (User?.Identity?.IsAuthenticated ?? false)
+        {<button class="FormbuttonT" onclick="hidehow()">></button>
+            <div class="side" id="side">
+                @await Component.InvokeAsync("UserTournaments")
+            </div>}
+        else
+        {
+
+        }
+
+
+        <div class="main">
+            @RenderBody()
+        </div>
     </div>
-   <footer>
-    <section id="footertext">
 
-        <div class="footerboks">
-            <div><h3>Explore</h3></div>
-            <div><a>Create</a></div>
-            <div><a>Tournaments</a></div>
-            <div><a>About us</a></div>
-            <div><a>Log in</a></div>
-            <div><a>Sign up</a></div>
-        </div>
 
-        <div class="footerboks">
-            <div><h3>About</h3></div>
-            <div> &copy; 2021 - TournamentWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></div>
-            <div><a>Terms</a></div>
-            <div><a>API</a></div>
-        </div>
 
-        <div class="footerboks">
-            <div><h3>Social</h3></div>
-            <img src="images/discord-16.png">
-            <img src="images/discord-16.png">
-        </div>
-    </section>
+
+    <footer>
+        <section id="footertext">
+
+            <div class="footerboks">
+                <div><h3>Explore</h3></div>
+                <div><a>Create</a></div>
+                <div><a>Tournaments</a></div>
+                <div><a>About us</a></div>
+                <div><a>Log in</a></div>
+                <div><a>Sign up</a></div>
+            </div>
+
+            <div class="footerboks">
+                <div><h3>About</h3></div>
+                <div><a>School Project</a></div>
+                <div><a>Terms</a></div>
+                <div><a>API</a></div>
+            </div>
+
+            <div class="footerboks">
+                <div><h3>Social</h3></div>
+                <img src="/images/discord-48.png">
+
+            </div>
+        </section>
     </footer>
 
 
@@ -111,11 +129,62 @@
 </body>
 </html>
 
+
+
+
 <style>
-    .main {
-        background-color: #22282a;
+    nav {
+        display: flex !important;
+        flex-direction: row !important;
     }
-    .body {
-        background-color: #22282a;
+
+    .nav-buttons {
+        width: 25%;
+        display: flex;
+        flex-direction: row;
+        margin-right: 20%;
+        align-items: center;
+    }
+
+        .nav-buttons button {
+            margin-right: 5%;
+        }
+
+    .navting {
+        width: 100%;
+        height: 75px;
+        background-color: #1C2123 !important;
+        display: flex;
+        flex-direction: row;
+    }
+
+    nav-list {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .nav-A {
+        display: flex;
+        flex-direction: row;
+        width: 75%;
+    }
+
+    .nav-ul {
+        color: black;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 50%;
+    }
+
+    .nav-li {
+        margin-left: 10%;
+        width: 50%;
+    }
+
+    .Link-nav {
+        color: white;
+        text-decoration: none !important;
     }
 </style>

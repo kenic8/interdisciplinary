@@ -9,7 +9,7 @@
 
 <div id="myTag"></div>
 
-<h1>
+<h1 >
     @Model.TournamentName
 </h1>
 
@@ -18,8 +18,12 @@
 
 <br/>
 <div id="Overview" class="tabcontent">
- 
+    <button class="orangebutton" style=" font-size: 100%; width: 20%; float: right; margin-top:-4%;" onclick="testfuck(@Model.TournamentId, 0, 0, 'CreateTeam')">
+        Join Tournament
+    </button>
     @await Html.PartialAsync("_TournamentOverview")
+
+
 </div>
 
 <div id="Brackets" class="tabcontent">
@@ -46,9 +50,7 @@
 
 
 
-<button class="btn btn-primary" onclick="testfuck(@Model.TournamentId, 0, 0, 'CreateTeam')">
-    Join Tournament
-</button>
+
 
 
 <style>
@@ -70,6 +72,10 @@
     /* Hiding tabcontent  */
     .tabcontent {
         display: none;
+    }
+
+    h1{
+        color:whitesmoke;
     }
 
 </style>

@@ -46,9 +46,10 @@ namespace TournamentWeb.Controllers
 
                 foreach (var P in queryF)
                 {
+                    P.ParticipantsAmount = 0;
                     foreach (var fatt in P.Teams)
                     {
-                        P.ParticipantsAmount = 0;
+                        
 
                         P.ParticipantsAmount += fatt.Attendees.Count;
 

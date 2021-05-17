@@ -6,11 +6,6 @@
 
 
 
-@*Look at the controller du find the redirect action method named accordingly*@
-<a class="nav-link text-white" asp-area="" asp-controller="Addtournament" asp-action="AddTournament"> Create Tournament</a>
-<a class="nav-link text-white" asp-area="" asp-controller="UserProfile" asp-action="Index"> Profile</a>
-
-
 <div class="container">
     <h2> Newest Torunaments</h2>
     <ul class="cards">
@@ -104,15 +99,6 @@
 
 
 
-
-@*@if (User?.Identity?.IsAuthenticated ?? false)
-    {
-        <a asp-controller="Account" asp-action="Logout"
-           class="btn btn-danger">Logout</a>
-    }*@
-
-
-
 <style>
 
     container {
@@ -178,7 +164,7 @@
         display: flex;
         padding: 1rem;
         width: 25%;
-        max-width: 350px;
+        max-width: 250px;
     }
 
 

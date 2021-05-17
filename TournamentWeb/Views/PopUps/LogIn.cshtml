@@ -1,20 +1,20 @@
 ﻿@model TournamentWeb.Models.ViewModels.LoginViewModel
 
-<div class="PopupBox">
+<div class="formouter">
     <div class="textlogin"><h4>Log In</h4></div>
     <div asp-validation-summary="All"></div>
-    <form class="formtime" asp-action="Login" asp-controller="Account" method="post">
+    <form asp-action="Login" asp-controller="Account" method="post">
         <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-        <div  class="form">
+        <div class="form">
             <label asp-for="UserName"></label>
             <input class="formtime username" asp-for="UserName" />
         </div>
         <div class="form">
-            <label  asp-for="Password"></label>
-            <input  class="formtime pass" asp-for="Password"  style="width:100%;" />
+            <label asp-for="Password"></label>
+            <input class="formtime" asp-for="Password" />
         </div>
         <div class="textlogin">
-            <p>Did you forget your login?<a href="">Click here</a></p> 
+            <p>Did you forget your login?<a href="">Click here</a></p>
         </div>
         <button class="orangebutton" type="submit">Log In</button>
     </form>
@@ -57,11 +57,5 @@
             top: 50%;
         }
 
-        .pass, .username {
-            margin: 0;
-            border-color: #43b581;
-            border: solid;
-            color: #43b581;
-            width:50%;
-        }
+       
     </style>
