@@ -1,36 +1,98 @@
 ﻿@model TournamentWeb.Models.ViewModels.RegisterViewModel
+<!DOCTYPE html>
+<div class="registerPage">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form class="formouter register" asp-controller="Account" asp-action="Register" method="post" enctype="multipart/form-data" >
+        <div class="form" >
+            <label asp-for="UserName"></label>
+            <input  asp-for="UserName"  />
+        </div>
 
-<div asp-validation-summary="All" class="text-danger"></div>
-<form asp-controller="Account" asp-action="Register" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="UserName"></label>
-        <input asp-for="UserName" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" />
-    </div>
+        <div class="form" >
+            <label   asp-for="Email"></label>
+            <input  asp-for="Email" />
+        </div>
+        <div class="form">
+            <label asp-for="Password"></label>
+            <input class="pass" asp-for="Password"  style="width:100%" />
+        </div>
 
-    <div class="form-group">
-        <label asp-for="ConfirmPassword"></label>
-        <input asp-for="ConfirmPassword" class="form-control" />
-    </div>
+        <div class="form">
+            <label  asp-for="ConfirmPassword"></label>
+            <input class="pass" asp-for="ConfirmPassword"  style="width:100%" />
+        </div>
 
-    <div class="form-group">
-        <label asp-for="UserDiscord"></label>
-        <input asp-for="UserDiscord" class="form-control" />
-    </div>
+        <div class="form">
+            <label  asp-for="UserDiscord"></label>
+            <input  asp-for="UserDiscord" />
+        </div>
 
-    <div class="form-group">
-        <label asp-for="ProfileImageFile" class="form-label">Add new profile picture</label>
-        <input asp-for="ProfileImageFile" class="form-control" type="file">
-        <label hidden asp-for="ProfileImage"></label>
-    </div>
+        <div class="form" >
+            <label asp-for="ProfileImageFile" > Upload profilepicture</label>
+            <input  class="formtime" asp-for="ProfileImageFile"  type="file">
+        </div>
+        <div id="registerbuttons">
+            <div id="registergreen">
+                <button type="submit" class="orangebutton">Sign Up</button>
+            </div>
+            <div id="registerblack">
+                <button asp-controller="Account" asp-action="Logout" class="Blackbutton">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-controller="Account" asp-action="Logout" class="btn btn-secondary">Cancel</a>
-</form>
+<style>
+
+    label{
+        margin:0;
+    }
+    .pass, .username {
+        margin: 0;
+        border-color: #43b581;
+        border: solid;
+        color: #43b581;
+        width: 50%;
+        background-color: #1F1F1F;
+      
+    }
+
+    #registergreen {
+        width: 30%;
+    }
+    .register{
+
+        width:70%;
+        margin:0;
+        margin-bottom: 5%;
+    }
+
+    #registerbuttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding-bottom: 5%;
+    }
+
+    .registerPage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background-color: #22282A;
+    }
+
+        .registerPage form {
+            margin-top:-1%;
+            width: 40%;
+        }
+
+        .registerPage button {
+            justify-content: center;
+        }
+
+        
+        .form{
+            height: 100px;
+        }
+</style>

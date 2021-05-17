@@ -23,7 +23,6 @@ body {
     display: flex;
     align-content: flex-start;
     justify-content: space-around;
-    transform: translateY(70vh);
 }
 
 #picturesektion {
@@ -54,7 +53,7 @@ body {
     width: 30%;
     padding-top: 2%;
     text-decoration: none;
-    font-size: 35px;
+    font-size: 150%;
     width: 100%;
     border: none;
     background-color: #2cda9d;
@@ -231,3 +230,31 @@ align-items:flex-start;
 }
 
 
+
+
+.textlogin {
+    text-align: center;
+    margin-top: 2%;
+    padding-bottom: 2%;
+}
+
+    .textlogin a {
+        margin-left: 1%;
+        color: white;
+    }
+
+.PopupBox {
+    height: 400px;
+    width: 700px;
+    border-radius: 24px;
+    color: white;
+    background: #22282a;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+    .PopupBox input {
+        box-shadow: 3px 3px 4px black;
+    }
